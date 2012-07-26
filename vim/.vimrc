@@ -50,7 +50,7 @@ syntax on
 set number
 set title
 set ruler
-set swapfile
+set noswapfile
 
 highlight ZenkakuSpace ctermbg=6
 match ZenkakuSpace /\s\+$\|　/
@@ -81,8 +81,10 @@ set smartcase
 "incremental search
 set incsearch
 
-"Remove spaces
+"Remove end of line spaces
 autocmd BufWritePre * :%s/\s\+$//ge
+"Tab to space
+autocmd BufWritePre * :%s/\t/  /ge
 
 "set cursorl highlight
 set cursorline

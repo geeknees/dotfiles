@@ -65,6 +65,8 @@ alias svn-clean='rm -rf `find ./ -type d -name .svn ! -regex \.svn/. -print`'
 alias swp-clean='rm -rf `find ./ -type d -name .swp ! -regex \.swp/. -print`'
 alias git-clean='rm -rf `find ./ -type d -name .git ! -regex \.git/. -print`'
 
+alias t='todo.sh'
+
 # This loads RVM into a shell session.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 

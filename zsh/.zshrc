@@ -1,6 +1,7 @@
 export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
+export LC_ALL=C
 
 # === PROMPT ===
 local gray=$'%{\e[0;30m%}'

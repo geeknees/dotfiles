@@ -28,7 +28,7 @@ setopt prompt_subst
 #PROMPT="$GREEN%~ $BLACK
 #$HOSTNAME $YELLOW%U%n$DEFAULT "
 PROMPT="$RED%{[%}$RED%T$YELLOW@%m:$GREEN%~$BLACK$HOSTNAME]
-$YELLOW⚡ $DEFAULT"
+$YELLOW⚡  $DEFAULT"
 #PROMPT="$YELLOW⚡ $DEFAULT"
 
 autoload -Uz vcs_info
@@ -59,15 +59,19 @@ autoload -U compinit && compinit
 
 export PATH=/usr/local/bin:$PATH
 
-alias ls='ls -G'
+alias ls='ls -vG'
+alias ll='ls -la'
+
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
-alias svn-clean='rm -rf `find ./ -type d -name .svn ! -regex \.svn/. -print`'
-alias swp-clean='rm -rf `find ./ -type d -name .swp ! -regex \.swp/. -print`'
-alias git-clean='rm -rf `find ./ -type d -name .git ! -regex \.git/. -print`'
-
 alias t='todo.sh'
+#alias svn-clean='rm -rf `find ./ -type d -name .svn ! -regex \.svn/. -print`'
+#alias swp-clean='rm -rf `find ./ -type d -name .swp ! -regex \.swp/. -print`'
+#alias git-clean='rm -rf `find ./ -type d -name .git ! -regex \.git/. -print`'
 
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+export PATH=$PATH:/Applications/android-sdk-macosx/tools
+
 

@@ -48,6 +48,7 @@ Bundle 'Lokaltog/vim-powerline'
 filetype plugin indent on     " required!
 
 colorscheme desert
+set background=dark
 syntax on
 set number
 set title

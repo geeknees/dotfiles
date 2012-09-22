@@ -43,6 +43,8 @@ Bundle 'tyru/open-browser.vim'
 Bundle 'h1mesuke/unite-outline'
 Bundle 'basyura/bitly.vim'
 
+Bundle 'Lokaltog/vim-powerline'
+
 filetype plugin indent on     " required!
 
 colorscheme desert

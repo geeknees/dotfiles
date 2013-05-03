@@ -43,12 +43,27 @@ Bundle 'tyru/open-browser.vim'
 Bundle 'h1mesuke/unite-outline'
 Bundle 'basyura/bitly.vim'
 
+"Status Bar
 Bundle 'Lokaltog/vim-powerline'
+
+"Markdown
+Bundle 'mattn/mkdpreview-vim'
+Bundle 'mattn/webapi-vim'
+
+"EverVim
+"Bundle 'kakkyz81/evervim'
+"Bundle 'tyru/open-browser.vim'
+"Bundle 'trobrock/evernote.vim'
+
+Bundle 'slim-template/vim-slim'
 
 filetype plugin indent on     " required!
 
 colorscheme desert
-set background=dark
+"colorscheme molokai
+"let g:molokai_original = 1
+"colorscheme railscasts
+"set background=dark
 syntax on
 set number
 set title
@@ -76,8 +91,16 @@ set noautoindent
 
 
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
+
 autocmd FileType php setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd BufNewFile,BufRead *.ctp set filetype=php
+autocmd FileType ctp setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+autocmd BufNewFile,BufRead *.md set filetype=markdown
+
+autocmd BufNewFile,BufRead *.less set filetype=css
+
+autocmd BufNewFile,BufRead *.slim set filetype=slim
 
 set ignorecase
 set smartcase
@@ -100,7 +123,7 @@ augroup END
 
 hi clear CursorLine
 hi CursorLine gui=underline
-highlight CursorLine ctermbg=darkblue  guibg=darkred
+hi CursorLine ctermbg=darkblue guibg=black
 
 "show status bar
 set laststatus=2

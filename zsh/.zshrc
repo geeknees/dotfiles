@@ -2,6 +2,7 @@ export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
 export LC_ALL=C
+export LESSCHARSET=utf-8
 
 # === PROMPT ===
 local gray=$'%{\e[0;30m%}'
@@ -28,7 +29,9 @@ setopt prompt_subst
 #PROMPT="$GREEN%~ $BLACK
 #$HOSTNAME $YELLOW%U%n$DEFAULT "
 PROMPT="$RED%{[%}$RED%T$YELLOW@%m:$GREEN%~$BLACK$HOSTNAME]
-$YELLOW⚡  $DEFAULT"
+$YELLOW≫ $DEFAULT"
+
+#$YELLOW⚡  $DEFAULT"
 #PROMPT="$YELLOW⚡ $DEFAULT"
 
 autoload -Uz vcs_info
@@ -57,21 +60,48 @@ setopt hist_reduce_blanks
 
 autoload -U compinit && compinit
 
-export PATH=/usr/local/bin:$PATH
-
 alias ls='ls -vG'
 alias ll='ls -la'
-
 export LSCOLORS=gxfxcxdxbxegedabagacad
-
+alias cp="cp -p"
+alias mv="mv -i"
+alias rm="rm -i"
+alias vi="vim"
+alias g="git"
+alias gits="git status"
+alias gitb="git branch"
 alias t='todo.sh'
+alias rake='bundle exec rake'
 #alias svn-clean='rm -rf `find ./ -type d -name .svn ! -regex \.svn/. -print`'
 #alias swp-clean='rm -rf `find ./ -type d -name .swp ! -regex \.swp/. -print`'
 #alias git-clean='rm -rf `find ./ -type d -name .git ! -regex \.git/. -print`'
 
+alias memo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
+alias tmux='tmux -u'
+
 # This loads RVM into a shell session.
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-export PATH=$PATH:/Applications/android-sdk-macosx/tools
+export PATH=/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/share/python:/Applications/android-sdk-macosx/tools
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
+# For crontab
+export EDITOR=/usr/bin/vim
+
+# For node
+export NODE_PATH=/usr/local/lib/node:$PATH
+export PATH=/usr/local/share/npm/bin:$PATH
+
+# For tig
+export LC_ALL="en_US.UTF-8"
+
+# For unix shortcut on tmux
+bindkey -e
+
+# For z
+ . `brew --prefix`/etc/profile.d/z.sh
+function precmd () {
+  z --add "$(pwd -P)"
+}
 

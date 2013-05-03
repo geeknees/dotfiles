@@ -15,3 +15,7 @@ tmp/
 !**/*.xcodeproj/default.*
 *.xcworkspace/*
 !*.xcworkspace/contents.xcworkspacedata
+
+node_modules
+
+robots.txt

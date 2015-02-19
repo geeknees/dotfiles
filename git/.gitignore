@@ -4,6 +4,8 @@ log/*.log
 tmp/
 .DS_Store
 .rvmrc
+.ruby-version
+.ruby-gemset
 .powrc
 .powenv
 

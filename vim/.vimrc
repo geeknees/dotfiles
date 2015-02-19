@@ -11,6 +11,14 @@ Bundle 'vundle'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/unite.vim'
 Bundle 'thinca/vim-ref'
+
+Bundle 'tpope/vim-fugitive'
+Bundle 'kien/ctrlp.vim'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'sheerun/vim-polyglot'
+Bundle 'vim-scripts/grep.vim'
+"Bundle 'vim-scripts/CSApprox'
+
 "php manual
 let g:ref_phpmanual_path = $HOME . '/Documents/Reference/phprefm'
 "Bundle 'thinca/vim-quickrun'
@@ -18,14 +26,17 @@ let g:ref_phpmanual_path = $HOME . '/Documents/Reference/phprefm'
 "Ruby
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'tpope/vim-rails'
+Bundle "tpope/vim-rake"
+Bundle "tpope/vim-projectionist"
+Bundle "thoughtbot/vim-rspec"
 
 "PHP
 "Bundle 'violetyk/cake.vim'
 
 "Html
-Bundle 'mattn/zencoding-vim'
+"Bundle 'mattn/zencoding-vim'
 
-"Bundle 'The-NERD-tree'
+Bundle 'scrooloose/nerdtree'
 "Bundle 'project.vim'
 Bundle 'taglist.vim'
 Bundle 'vtreeexplorer'
@@ -48,7 +59,6 @@ Bundle 'Lokaltog/vim-powerline'
 
 "Markdown
 Bundle 'mattn/mkdpreview-vim'
-Bundle 'mattn/webapi-vim'
 
 "EverVim
 "Bundle 'kakkyz81/evervim'
@@ -160,6 +170,10 @@ map <silent> tl :Tlist<CR>
 
 "VSTreeExplore
 map <silent> vt :VSTreeExplore<CR>
+
+"NerdTree
+map <silent> nt :NERDTree<CR>
+
 
 "yanktmp
 map <silent> sy :call YanktmpYank()<CR>

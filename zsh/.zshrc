@@ -32,16 +32,58 @@ $YELLOW≫ $DEFAULT"
 #$YELLOW⚡  $DEFAULT"
 #PROMPT="$YELLOW⚡ $DEFAULT"
 
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '(%s)-[%b]'
-zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
-precmd () {
-  psvar=()
-  LANG=en_US.UTF-8 vcs_info
-  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+autoload vcs_info
+# gitのみ有効にする
+zstyle ":vcs_info:*" enable git
+# commitしていない変更をチェックする
+zstyle ":vcs_info:git:*" check-for-changes true
+# gitリポジトリに対して、変更情報とリポジトリ情報を表示する
+zstyle ":vcs_info:git:*" formats "%c%u[%b:%r]"
+# gitリポジトリに対して、コンフリクトなどの情報を表示する
+zstyle ":vcs_info:git:*" actionformats "%c%u<%a>[%b:%r]"
+# addしていない変更があることを示す文字列
+zstyle ":vcs_info:git:*" unstagedstr "<U>"
+# commitしていないstageがあることを示す文字列
+zstyle ":vcs_info:git:*" stagedstr "<S>"
+
+# git：まだpushしていないcommitあるかチェックする
+my_git_info_push () {
+  if [ "$(git remote 2>/dev/null)" != "" ]; then
+    local head="$(git rev-parse HEAD)"
+    local remote
+    for remote in $(git rev-parse --remotes) ; do
+      if [ "$head" = "$remote" ]; then return 0 ; fi
+    done
+    # pushしていないcommitがあることを示す文字列
+    echo "<P>"
+  fi
 }
 
-RPROMPT="%1(v|%F{red}%1v%f|)"
+# git：stashに退避したものがあるかチェックする
+my_git_info_stash () {
+  if [ "$(git stash list 2>/dev/null)" != "" ]; then
+    # stashがあることを示す文字列
+    echo "{s}"
+  fi
+}
+
+# vcs_infoの出力に独自の出力を付加する
+my_vcs_info () {
+  vcs_info
+  echo $(my_git_info_stash)$(my_git_info_push)$vcs_info_msg_0_
+}
+RPROMPT=$'$(my_vcs_info)'
+
+#autoload -Uz vcs_info
+#zstyle ':vcs_info:*' formats '(%s)-[%b]'
+#zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
+#precmd () {
+#  psvar=()
+#  LANG=en_US.UTF-8 vcs_info
+#  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+#}
+#
+#RPROMPT="%1(v|%F{red}%1v%f|)"
 # /=== PROMPT ===
 
 HISTFILE=$HOME/.zsh_history           # 履歴をファイルに保存する
@@ -74,14 +116,14 @@ alias rake='bundle exec rake'
 #alias swp-clean='rm -rf `find ./ -type d -name .swp ! -regex \.swp/. -print`'
 #alias git-clean='rm -rf `find ./ -type d -name .git ! -regex \.git/. -print`'
 
-alias memo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
+alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
+alias smemo='sublime ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias tmux='tmux -u'
 
 # This loads RVM into a shell session.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 export PATH=/usr/local/bin:$PATH
-export PATH=$PATH:/usr/local/share/python:/Applications/android-sdk-macosx/tools
+export PATH=$PATH:/usr/local/sbin:/Applications/android-sdk-macosx/tools
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
 # For crontab
@@ -103,3 +145,18 @@ function precmd () {
   z --add "$(pwd -P)"
 }
 
+#PATH for madever
+PATH=$HOME/.cabal/bin:$PATH
+
+function gi() { curl http://www.gitignore.io/api/$@ ;}
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
+export COCOS_CONSOLE_ROOT=/Users/masumi/Downloads/cocos2d-x-3.2/tools/cocos2d-console/bin
+export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+# Add environment variable ANDROID_SDK_ROOT for cocos2d-x
+export ANDROID_SDK_ROOT=/Applications/android-sdk-macosx
+export PATH=$ANDROID_SDK_ROOT:$PATH
+export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH

@@ -120,18 +120,8 @@ alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias smemo='sublime ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias tmux='tmux -u'
 
-# This loads RVM into a shell session.
-
-export PATH=/usr/local/bin:$PATH
-export PATH=$PATH:/usr/local/sbin:/Applications/android-sdk-macosx/tools
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-
 # For crontab
 export EDITOR=/usr/bin/vim
-
-# For node
-export NODE_PATH=/usr/local/lib/node:$PATH
-export PATH=/usr/local/share/npm/bin:$PATH
 
 # For tig
 export LC_ALL="en_US.UTF-8"
@@ -145,18 +135,29 @@ function precmd () {
   z --add "$(pwd -P)"
 }
 
-#PATH for madever
-PATH=$HOME/.cabal/bin:$PATH
+export PATH=/usr/local/bin:$PATH
 
+# PATH for madever
+PATH=$HOME/.cabal/bin:$PATH
 function gi() { curl http://www.gitignore.io/api/$@ ;}
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+export PATH="$HOME/.pyenv/shims:$PATH"
+
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-export COCOS_CONSOLE_ROOT=/Users/masumi/Downloads/cocos2d-x-3.2/tools/cocos2d-console/bin
-export PATH=$COCOS_CONSOLE_ROOT:$PATH
+#export COCOS_CONSOLE_ROOT=/Users/masumi/Downloads/cocos2d-x-3.2/tools/cocos2d-console/bin
+#export PATH=$COCOS_CONSOLE_ROOT:$PATH
 
 # Add environment variable ANDROID_SDK_ROOT for cocos2d-x
-export ANDROID_SDK_ROOT=/Applications/android-sdk-macosx
-export PATH=$ANDROID_SDK_ROOT:$PATH
-export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
+#export ANDROID_SDK_ROOT=/Applications/android-sdk-macosx
+#export PATH=$ANDROID_SDK_ROOT:$PATH
+#export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
+
+# For node
+export NODE_PATH=/usr/local/lib/node:$PATH
+export PATH=/usr/local/share/npm/bin:$PATH
+
+# PATH for postgresql
+export PATH="/Applications/Postgres93.app/Contents/MacOS/bin:$PATH:$PATH"
+

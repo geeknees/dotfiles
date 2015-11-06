@@ -27,7 +27,7 @@ setopt prompt_subst
 #PROMPT="$GREEN%~ $BLACK
 #$HOSTNAME $YELLOW%U%n$DEFAULT "
 PROMPT="$RED%{[%}$RED%T$YELLOW@%m:$GREEN%~$BLACK$HOSTNAME]
-$YELLOW≫ $DEFAULT"
+$YELLOW⚡ $DEFAULT"
 
 #$YELLOW⚡  $DEFAULT"
 #PROMPT="$YELLOW⚡ $DEFAULT"
@@ -117,11 +117,16 @@ alias rake='bundle exec rake'
 #alias git-clean='rm -rf `find ./ -type d -name .git ! -regex \.git/. -print`'
 
 alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
-alias smemo='sublime ~/Dropbox/work/memo/$(date +%Y%m%d).md'
+alias smemo='subl ~/Dropbox/work/memo/$(date +%Y%m%d).md'
+alias amemo='atom ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias tmux='tmux -u'
 
 # For crontab
 export EDITOR=/usr/bin/vim
+
+# For node
+export NODE_PATH=/usr/local/lib/node:$PATH
+export PATH=/usr/local/share/npm/bin:$PATH
 
 # For tig
 export LC_ALL="en_US.UTF-8"
@@ -135,14 +140,13 @@ function precmd () {
   z --add "$(pwd -P)"
 }
 
-export PATH=/usr/local/bin:$PATH
-
-# PATH for madever
+#PATH for madever
 PATH=$HOME/.cabal/bin:$PATH
+
 function gi() { curl http://www.gitignore.io/api/$@ ;}
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
+export PATH="$PATH:$HOME/.roswell/bin" # Add RVM to PATH for scripting
 export PATH="$HOME/.pyenv/shims:$PATH"
 
 # Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
@@ -154,10 +158,16 @@ export PATH="$HOME/.pyenv/shims:$PATH"
 #export PATH=$ANDROID_SDK_ROOT:$PATH
 #export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
 
-# For node
-export NODE_PATH=/usr/local/lib/node:$PATH
-export PATH=/usr/local/share/npm/bin:$PATH
+export PATH=/usr/local/bin:$PATH
 
-# PATH for postgresql
-export PATH="/Applications/Postgres93.app/Contents/MacOS/bin:$PATH:$PATH"
+# python
+#export PATH=$PATH:/usr/local/sbin:/Applications/android-sdk-macosx/tools
+#export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+export PYTHONPATH=~/caffe/python:$PYTHONPATH
+export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/cuda/lib:$HOME/.pyenv/versions/anaconda-2.1.0/lib:/usr/local/lib:/usr/lib
 
+# go
+export GOPATH=$HOME/gocode
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+export PATH=$PATH:/usr/local/opt/go/libexec/bin

@@ -40,6 +40,8 @@ NeoBundle 'taglist.vim'
 NeoBundle 'vtreeexplorer'
 NeoBundle 'yanktmp.vim'
 NeoBundle 'mattn/mkdpreview-vim'
+NeoBundle 'tyru/open-browser.vim'
+NeoBundle 'rhysd/devdocs.vim'
 "Powerline
 NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
@@ -49,19 +51,17 @@ NeoBundle 'Lokaltog/powerline-fontpatcher'
 " NeoBundle 'basyura/TweetVim'
 " NeoBundle 'mattn/webapi-vim'
 " NeoBundle 'basyura/twibill.vim'
-" NeoBundle 'tyru/open-browser.vim'
 " NeoBundle 'h1mesuke/unite-outline'
 " NeoBundle 'basyura/bitly.vim'
 "EverVim
 " NeoBundle 'kakkyz81/evervim'
-" NeoBundle 'tyru/open-browser.vim'
 " NeoBundle 'trobrock/evernote.vim'
 "Ruby
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
-NeoBundle "tpope/vim-rake"
-NeoBundle "tpope/vim-projectionist"
-NeoBundle "thoughtbot/vim-rspec"
+NeoBundle 'tpope/vim-rake'
+NeoBundle 'tpope/vim-projectionist'
+NeoBundle 'thoughtbot/vim-rspec'
 NeoBundle 'slim-template/vim-slim'
 
 
@@ -77,10 +77,6 @@ NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
 colorscheme desert
-"colorscheme molokai
-"let g:molokai_original = 1
-"colorscheme railscasts
-"set background=dark
 syntax on
 set number
 set title
@@ -184,3 +180,6 @@ map <silent> nt :NERDTree<CR>
 map <silent> sy :call YanktmpYank()<CR>
 map <silent> sp :call YanktmpPaste_p()<CR>
 map <silent> sP :call YanktmpPaste_P()<CR>
+
+"devdocs
+nmap K <Plug>(devdocs-under-cursor)

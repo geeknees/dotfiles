@@ -18,8 +18,6 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Add or remove your Bundles here:
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'flazz/vim-colorschemes'
 
 " You can specify revision/branch/tag.
@@ -42,6 +40,7 @@ NeoBundle 'yanktmp.vim'
 NeoBundle 'mattn/mkdpreview-vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'rhysd/devdocs.vim'
+NeoBundle 'thinca/vim-quickrun'
 "Powerline
 NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
@@ -165,13 +164,13 @@ au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 "Tlist
-map <silent> tl :Tlist<CR>
+"map <silent> tl :Tlist<CR>
 
 "VSTreeExplore
-let g:treeExplVertical=1
-let g:treeExplSplitRight=1
-let g:treeExplWinSize=40
-map <silent> vt :VSTreeExplore<CR>
+"let g:treeExplVertical=1
+"let g:treeExplSplitRight=1
+"let g:treeExplWinSize=40
+"map <silent> vt :VSTreeExplore<CR>
 
 "NerdTree
 map <silent> nt :NERDTree<CR>

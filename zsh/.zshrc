@@ -21,16 +21,9 @@ local LIGHT_BLUE=$'%{\e[1;36m%}'   # 水色
 local WHITE=$'%{\e[1;37m%}'        # 白色
 local DEFAULT=$white               # 標準の色
 
-# prompt
-#PROMPT="$YELLOW%{%}[%~]%{%}:$GREEN%n@%m%u% $ "
 setopt prompt_subst
-#PROMPT="$GREEN%~ $BLACK
-#$HOSTNAME $YELLOW%U%n$DEFAULT "
 PROMPT="$RED%{[%}$RED%T$YELLOW@%m:$GREEN%~$BLACK$HOSTNAME]
 $YELLOW⚡ $DEFAULT"
-
-#$YELLOW⚡  $DEFAULT"
-#PROMPT="$YELLOW⚡ $DEFAULT"
 
 autoload vcs_info
 # gitのみ有効にする
@@ -74,16 +67,6 @@ my_vcs_info () {
 }
 RPROMPT=$'$(my_vcs_info)'
 
-#autoload -Uz vcs_info
-#zstyle ':vcs_info:*' formats '(%s)-[%b]'
-#zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
-#precmd () {
-#  psvar=()
-#  LANG=en_US.UTF-8 vcs_info
-#  [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-#}
-#
-#RPROMPT="%1(v|%F{red}%1v%f|)"
 # /=== PROMPT ===
 
 HISTFILE=$HOME/.zsh_history           # 履歴をファイルに保存する
@@ -100,26 +83,29 @@ setopt hist_reduce_blanks
 
 autoload -U compinit && compinit
 
+export XDG_CONFIG_HOME=$HOME/.config
+export LSCOLORS=gxfxcxdxbxegedabagacad
+
 alias ls='ls -vG'
 alias ll='ls -la'
-export LSCOLORS=gxfxcxdxbxegedabagacad
 alias cp="cp -p"
 alias mv="mv -i"
 alias rm="rm -i"
-alias vi="vim"
+alias vi="nvim"
 alias g="git"
 alias gits="git status"
 alias gitb="git branch"
-alias t='todo.sh'
-alias rake='bundle exec rake'
-#alias svn-clean='rm -rf `find ./ -type d -name .svn ! -regex \.svn/. -print`'
-#alias swp-clean='rm -rf `find ./ -type d -name .swp ! -regex \.swp/. -print`'
-#alias git-clean='rm -rf `find ./ -type d -name .git ! -regex \.git/. -print`'
+alias t='todo.sh -t -d ~/Dropbox/PlainText/.todo.cfg'
 
 alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
-alias smemo='subl ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias amemo='atom ~/Dropbox/work/memo/$(date +%Y%m%d).md'
-alias tmux='tmux -u'
+alias random-text='openssl rand -base64 12 | fold -w 10 | head -1'
+alias global-ip='curl ifconfig.io'
+
+# brew
+export PATH="/usr/local/sbin:$PATH"
+export HOMEBREW_NO_ANALYTICS=1
+alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew"
 
 # For crontab
 export EDITOR=/usr/bin/vim
@@ -145,29 +131,24 @@ PATH=$HOME/.cabal/bin:$PATH
 
 function gi() { curl http://www.gitignore.io/api/$@ ;}
 
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.roswell/bin" # Add RVM to PATH for scripting
+# Roswell - Common Lisp environment setup Utility.
+export PATH="$PATH:$HOME/.roswell/bin"
+
 export PATH="$HOME/.pyenv/shims:$PATH"
-
-# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
-#export COCOS_CONSOLE_ROOT=/Users/masumi/Downloads/cocos2d-x-3.2/tools/cocos2d-console/bin
-#export PATH=$COCOS_CONSOLE_ROOT:$PATH
-
-# Add environment variable ANDROID_SDK_ROOT for cocos2d-x
-#export ANDROID_SDK_ROOT=/Applications/android-sdk-macosx
-#export PATH=$ANDROID_SDK_ROOT:$PATH
-#export PATH=$ANDROID_SDK_ROOT/tools:$ANDROID_SDK_ROOT/platform-tools:$PATH
 
 export PATH=/usr/local/bin:$PATH
 
 # python
-#export PATH=$PATH:/usr/local/sbin:/Applications/android-sdk-macosx/tools
-#export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-export PYTHONPATH=~/caffe/python:$PYTHONPATH
-export DYLD_FALLBACK_LIBRARY_PATH=/usr/local/cuda/lib:$HOME/.pyenv/versions/anaconda-2.1.0/lib:/usr/local/lib:/usr/lib
+export PYTHONPATH=$HOME/caffe/python:$PYTHONPATH
+export CAFFE_ROOT=$HOME/caffe
+
 
 # go
 export GOPATH=$HOME/gocode
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

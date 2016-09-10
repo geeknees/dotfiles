@@ -23,7 +23,6 @@ NeoBundle 'flazz/vim-colorschemes'
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
 
-
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'thinca/vim-ref'
@@ -34,7 +33,6 @@ NeoBundle 'sheerun/vim-polyglot'
 NeoBundle 'vim-scripts/grep.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'taglist.vim'
 NeoBundle 'vtreeexplorer'
 NeoBundle 'yanktmp.vim'
 NeoBundle 'mattn/mkdpreview-vim'
@@ -45,23 +43,10 @@ NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'alpaca-tc/alpaca_powertabline'
 NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
 NeoBundle 'Lokaltog/powerline-fontpatcher'
-" NeoBundle 'project.vim'
-"TweetVim and Dependencies
-" NeoBundle 'basyura/TweetVim'
-" NeoBundle 'mattn/webapi-vim'
-" NeoBundle 'basyura/twibill.vim'
-" NeoBundle 'h1mesuke/unite-outline'
-" NeoBundle 'basyura/bitly.vim'
-"EverVim
-" NeoBundle 'kakkyz81/evervim'
-" NeoBundle 'trobrock/evernote.vim'
-"Ruby
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-rake'
-NeoBundle 'tpope/vim-projectionist'
 NeoBundle 'thoughtbot/vim-rspec'
-NeoBundle 'slim-template/vim-slim'
 
 
 " Required:
@@ -163,14 +148,11 @@ noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
-"Tlist
-"map <silent> tl :Tlist<CR>
-
 "VSTreeExplore
-"let g:treeExplVertical=1
-"let g:treeExplSplitRight=1
-"let g:treeExplWinSize=40
-"map <silent> vt :VSTreeExplore<CR>
+let g:treeExplVertical=1
+let g:treeExplSplitRight=1
+let g:treeExplWinSize=40
+map <silent> vt :VSTreeExplore<CR>
 
 "NerdTree
 map <silent> nt :NERDTree<CR>

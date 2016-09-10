@@ -20,6 +20,9 @@ repo = 'yanktmp.vim'
 [[plugins]]
 repo = 'rhysd/devdocs.vim'
 
+[[plugins]]
+repo  =  'itchyny/lightline.vim'
+
 ################################################
 # HTML CSS Javascript
 ################################################

@@ -65,6 +65,7 @@ set ignorecase
 set smartcase
 set incsearch
 set viminfo='20,\"1000
+set clipboard=unnamed
 
 highlight ZenkakuSpace ctermbg=6
 match ZenkakuSpace /\s\+$\|　/
@@ -99,10 +100,6 @@ set laststatus=2
 set statusline=%F%m%r%h%w\ [%{&syntax}]\[%{&ff}]\[%{&fileencoding}]\[%p%%]\ %l/%L
 hi StatusLine gui=NONE guifg=Black guibg=Green cterm=NONE ctermfg=Black ctermbg=Blue
 hi StatusLineNC gui=NONE guifg=Black guibg=Green cterm=NONE ctermfg=Black ctermbg=White
-
-"neocomplcache
-"active at startup
-let g:neocomplcache_enable_at_startup = 1
 
 "start with insert mode
 let g:unite_enable_start_insert=1

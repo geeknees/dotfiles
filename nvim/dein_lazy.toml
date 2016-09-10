@@ -51,13 +51,3 @@ repo = 'ConradIrwin/vim-bracketed-paste'
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-
-[[plugins]]
-repo  =  'alpaca-tc/alpaca_powertabline'
-
-[[plugins]]
-repo  =  'Lokaltog/powerline'
-rtp   =  'powerline/bindings/vim'
-
-[[plugins]]
-repo  =  'Lokaltog/powerline-fontpatcher'

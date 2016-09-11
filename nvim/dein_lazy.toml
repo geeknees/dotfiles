@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'Shougo/neomru.vim'
-on_path = '.*'
+on_if = 1
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
@@ -8,19 +8,15 @@ on_i = 1
 
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
-on_path = '.*'
-on_i = 1
+on_if = 1
+on_event = 'TextYankPost'
+on_source = 'unite.vim'
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
 depends = ['neosnippet-snippets']
 on_i = 1
 on_ft = ['snippet']
-
-[[plugins]]
-repo = 'Shougo/neocomplete'
-if = 'has("lua")'
-on_i = 1
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
@@ -32,22 +28,5 @@ repo = 'Shougo/unite.vim'
 depends = 'neomru.vim'
 
 [[plugins]]
-repo = 'Shougo/vimshell'
-
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-
-[[plugins]]
-repo = 'sheerun/vim-polyglot'
-
-[[plugins]]
-repo = 'vim-scripts/grep.vim'
-
-[[plugins]]
 repo = 'ConradIrwin/vim-bracketed-paste'
-
-[[plugins]]
-repo = 'thinca/vim-quickrun'
+on_i = 1

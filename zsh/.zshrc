@@ -22,8 +22,8 @@ local WHITE=$'%{\e[1;37m%}'        # 白色
 local DEFAULT=$white               # 標準の色
 
 setopt prompt_subst
-PROMPT="$RED%{[%}$RED%T$YELLOW@%m:$GREEN%~$BLACK$HOSTNAME]
-$YELLOW⚡ $DEFAULT"
+PROMPT=" $RED%{%}$RED%T$YELLOW@%m:$GREEN%~$BLACK$HOSTNAME
+⚡ $DEFAULT"
 
 autoload vcs_info
 # gitのみ有効にする
@@ -102,6 +102,9 @@ alias amemo='atom ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias random-text='openssl rand -base64 12 | fold -w 10 | head -1'
 alias global-ip='curl ifconfig.io'
 
+# gitignore ex: gi ruby >> .gitignore
+function gi() { curl https://www.gitignore.io/api/$@ ;}
+
 # brew
 export PATH="/usr/local/sbin:$PATH"
 export HOMEBREW_NO_ANALYTICS=1
@@ -117,31 +120,21 @@ export PATH=/usr/local/share/npm/bin:$PATH
 # For tig
 export LC_ALL="en_US.UTF-8"
 
-# For unix shortcut on tmux
-bindkey -e
-
 # For z
  . `brew --prefix`/etc/profile.d/z.sh
 function precmd () {
   z --add "$(pwd -P)"
 }
 
-#PATH for madever
-PATH=$HOME/.cabal/bin:$PATH
-
-function gi() { curl http://www.gitignore.io/api/$@ ;}
-
 # Roswell - Common Lisp environment setup Utility.
 export PATH="$PATH:$HOME/.roswell/bin"
 
+# pyenv
 export PATH="$HOME/.pyenv/shims:$PATH"
 
-export PATH=/usr/local/bin:$PATH
-
-# python
+# caffe
 export PYTHONPATH=$HOME/caffe/python:$PYTHONPATH
 export CAFFE_ROOT=$HOME/caffe
-
 
 # go
 export GOPATH=$HOME/gocode
@@ -149,6 +142,8 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
+# rvm
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
+# iterm2
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

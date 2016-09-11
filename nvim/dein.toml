@@ -6,22 +6,43 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
+repo = 'Shougo/vimshell'
+
+[[plugins]]
+repo = 'sheerun/vim-polyglot'
+
+[[plugins]]
 repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]] # ステータスバー
+repo = 'itchyny/lightline.vim'
+
+[[plugins]] # gitの変更点
+repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 
 [[plugins]]
-repo = 'kien/ctrlp.vim'
-
-[[plugins]]
-repo = 'yanktmp.vim'
+repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]]
 repo = 'rhysd/devdocs.vim'
 
 [[plugins]]
-repo  =  'itchyny/lightline.vim'
+repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]] # カラースキーマ
+repo = 'chriskempson/vim-tomorrow-theme'
+
+[[plugins]] # カラースキーマ
+repo = 'w0ng/vim-hybrid'
 
 ################################################
 # HTML CSS Javascript
@@ -29,6 +50,10 @@ repo  =  'itchyny/lightline.vim'
 
 [[plugins]] # html5のコードをシンタックス表示する
 repo  = 'hail2u/vim-css3-syntax'
+on_ft = ['css', 'javascript', 'html']
+
+[[plugins]]
+repo  = 'lilydjwg/colorizer'
 on_ft = ['css', 'javascript', 'html']
 
 [[plugins]] # vimにjsのシンタックスを追加する
@@ -47,24 +72,12 @@ on_ft = 'javascript'
 repo = 'tpope/vim-endwise.git'
 on_ft = 'ruby'
 
-[[plugins]] # 対応括弧へのカーソル移動機能
-repo = 'ruby-matchit'
-on_ft = 'ruby'
-
 [[plugins]] #
 repo = 'vim-ruby/vim-ruby'
 on_ft = 'ruby'
 
 [[plugins]] # Railsプロジェクト用プラグイン
-repo = 'taichouchou2/vim-rails'
-on_ft = 'ruby'
-
-[[plugins]] # Railsプロジェクト用プラグイン
-repo = 'romanvbabenko/rails.vim'
-on_ft = 'ruby'
-
-[[plugins]] # RSpecをvimから実行
-repo = 'thoughtbot/vim-rspec'
+repo = 'tpope/vim-rails'
 on_ft = 'ruby'
 
 ################################################
@@ -83,7 +96,7 @@ on_ft = ['markdown', 'mkd']
 repo = 'joker1007/vim-markdown-quote-syntax'
 on_ft = ['markdown', 'mkd']
 
-[[plugins]] # markdownのPreviewス
+[[plugins]] # markdownのPreview
 repo = 'kannokanno/previm'
 on_ft = ['markdown', 'mkd']
 

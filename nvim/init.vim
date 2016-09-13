@@ -59,6 +59,7 @@ set incsearch
 set viminfo='20,\"1000
 set clipboard=unnamed
 set background=dark
+set termguicolors
 colorscheme Tomorrow-Night-Bright
 
 hi clear CursorLine

@@ -22,32 +22,21 @@ NeoBundle 'flazz/vim-colorschemes'
 
 " You can specify revision/branch/tag.
 NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/unite.vim'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'kien/ctrlp.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'vim-scripts/grep.vim'
 NeoBundle 'ConradIrwin/vim-bracketed-paste'
 NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'vtreeexplorer'
-NeoBundle 'yanktmp.vim'
 NeoBundle 'mattn/mkdpreview-vim'
 NeoBundle 'tyru/open-browser.vim'
 NeoBundle 'rhysd/devdocs.vim'
 NeoBundle 'thinca/vim-quickrun'
-"Powerline
-NeoBundle 'alpaca-tc/alpaca_powertabline'
-NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-NeoBundle 'Lokaltog/powerline-fontpatcher'
 NeoBundle 'vim-ruby/vim-ruby'
 NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-rake'
-NeoBundle 'thoughtbot/vim-rspec'
-
+NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'itchyny/lightline.vim'
 
 " Required:
 call neobundle#end()
@@ -60,107 +49,77 @@ filetype plugin indent on
 NeoBundleCheck
 "End NeoBundle Scripts-------------------------
 
-colorscheme desert
 syntax on
 set number
-set title
-set ruler
 set noswapfile
+set list
+set listchars=tab:^.
+set backspace=indent,eol,start
+set showmatch
+set hlsearch
+set encoding=utf-8
+set termencoding=utf-8
+set fileencodings=utf-8
+set expandtab
+set tabstop=2 shiftwidth=2 softtabstop=2
+set noautoindent
+set ignorecase
+set smartcase
+set incsearch
+set viminfo='20,\"1000
+set clipboard=unnamed
+set laststatus=2
+set background=dark
+
+hi clear CursorLine
+hi CursorLine ctermbg=darkblue guibg=black
 
 highlight ZenkakuSpace ctermbg=6
 match ZenkakuSpace /\s\+$\|　/
 
-set list
-set listchars=tab:^.
-
-set backspace=indent,eol,start
-set showmatch
-set hlsearch
 nmap <Esc><Esc> :nohlsearch<CR><Esc>
 
-set encoding=utf-8
-set termencoding=utf-8
-set fileencodings=utf-8
-
-set expandtab
-set tabstop=2 shiftwidth=2 softtabstop=2
-set noautoindent
+" Remove end of line spaces
+autocmd BufWritePre * :%s/\s\+$//ge
+" Tab to space
+autocmd BufWritePre * :%s/\t/  /ge
 
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
 autocmd FileType php setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-autocmd BufNewFile,BufRead *.ctp set filetype=php
-autocmd FileType ctp setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.less set filetype=css
+autocmd BufNewFile,BufRead *.scss set filetype=css
 autocmd BufNewFile,BufRead *.slim set filetype=slim
 
-set ignorecase
-set smartcase
-"incremental search
-set incsearch
-set viminfo='20,\"1000
+" previm
+let g:vim_markdown_folding_disabled=1
 
-"Remove end of line spaces
-autocmd BufWritePre * :%s/\s\+$//ge
-"Tab to space
-autocmd BufWritePre * :%s/\t/  /ge
+" deoplete
+let g:deoplete#enable_at_startup = 1
 
-"set cursorl highlight
-set cursorline
-"set window highlight
-augroup cch
-  autocmd! cch
-  autocmd WinLeave * set nocursorline
-  autocmd WinEnter,BufRead * set cursorline
-augroup END
-
-hi clear CursorLine
-hi CursorLine gui=underline
-hi CursorLine ctermbg=darkblue guibg=black
-
-"show status bar
-set laststatus=2
-set statusline=%F%m%r%h%w\ [%{&syntax}]\[%{&ff}]\[%{&fileencoding}]\[%p%%]\ %l/%L
-hi StatusLine gui=NONE guifg=Black guibg=Green cterm=NONE ctermfg=Black ctermbg=Blue
-hi StatusLineNC gui=NONE guifg=Black guibg=Green cterm=NONE ctermfg=Black ctermbg=White
-
-"neocomplcache
-"active at startup
-let g:neocomplcache_enable_at_startup = 1
-
-"start with insert mode
-let g:unite_enable_start_insert=1
-
-"mru,reg,buf
+" mru,reg,buf
 noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
 noremap :ur :<C-u>Unite register -buffer-name=register<CR>
 noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
 
-"file current_dir
+" file current_dir
 noremap :ufc :<C-u>Unite file -buffer-name=file<CR>
 noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
 
-"file file_current_dir
+" file file_current_dir
 noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
 noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
 
-"to shutdown wiht ESC ESC
+" to shutdown wiht ESC ESC
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
-"VSTreeExplore
-let g:treeExplVertical=1
-let g:treeExplSplitRight=1
-let g:treeExplWinSize=40
-map <silent> vt :VSTreeExplore<CR>
+" NerdTree
+noremap <silent> <C-e> :NERDTree<CR>
 
-"NerdTree
-map <silent> nt :NERDTree<CR>
+" quirck run
+let g:quickrun_no_default_key_mappings = 1
+nmap <unique> <C-r> <Plug>(quickrun)
 
-"yanktmp
-map <silent> sy :call YanktmpYank()<CR>
-map <silent> sp :call YanktmpPaste_p()<CR>
-map <silent> sP :call YanktmpPaste_P()<CR>
-
-"devdocs
+" devdocs
 nmap K <Plug>(devdocs-under-cursor)

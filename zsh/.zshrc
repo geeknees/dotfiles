@@ -22,7 +22,7 @@ local WHITE=$'%{\e[1;37m%}'        # 白色
 local DEFAULT=$white               # 標準の色
 
 setopt prompt_subst
-PROMPT=" $RED%{%}$RED%T$YELLOW@%m:$GREEN%~$BLACK$HOSTNAME
+PROMPT=" $red%{%}$red%T$YELLOW@%m:$GREEN%~$HOSTNAME
 ⚡ $DEFAULT"
 
 autoload vcs_info

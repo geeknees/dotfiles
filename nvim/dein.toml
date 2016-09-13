@@ -6,13 +6,13 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
 repo = 'Shougo/vimshell'
 
 [[plugins]]
 repo = 'sheerun/vim-polyglot'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]] # ステータスバー
 repo = 'itchyny/lightline.vim'
@@ -21,19 +21,7 @@ repo = 'itchyny/lightline.vim'
 repo = 'airblade/vim-gitgutter'
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
-
-[[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-
-[[plugins]]
-repo = 'rhysd/devdocs.vim'
-
-[[plugins]]
 repo = 'scrooloose/syntastic'
-
-[[plugins]]
-repo = 'thinca/vim-quickrun'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
@@ -41,73 +29,5 @@ repo = 'Yggdroot/indentLine'
 [[plugins]] # カラースキーマ
 repo = 'chriskempson/vim-tomorrow-theme'
 
-[[plugins]] # カラースキーマ
-repo = 'w0ng/vim-hybrid'
-
-################################################
-# HTML CSS Javascript
-################################################
-
-[[plugins]] # html5のコードをシンタックス表示する
-repo  = 'hail2u/vim-css3-syntax'
-on_ft = ['css', 'javascript', 'html']
-
-[[plugins]]
-repo  = 'lilydjwg/colorizer'
-on_ft = ['css', 'javascript', 'html']
-
-[[plugins]] # vimにjsのシンタックスを追加する
-repo  = 'pangloss/vim-javascript'
-on_ft = 'javascript'
-
-[[plugins]] # jsxのシンタックス
-repo = 'mxw/vim-jsx'
-on_ft = 'javascript'
-
-################################################
-# Ruby
-################################################
-
-[[plugins]] # def end の自動入力
-repo = 'tpope/vim-endwise.git'
-on_ft = 'ruby'
-
-[[plugins]] #
-repo = 'vim-ruby/vim-ruby'
-on_ft = 'ruby'
-
-[[plugins]] # Railsプロジェクト用プラグイン
-repo = 'tpope/vim-rails'
-on_ft = 'ruby'
-
-################################################
-# Other Files
-################################################
-
-[[plugins]] # markdownのシンタックス
-repo = 'rcmdnk/vim-markdown'
-on_ft = ['markdown', 'mkd']
-
-[[plugins]] # markdownのtableの整形
-repo = 'godlygeek/tabular'
-on_ft = ['markdown', 'mkd']
-
-[[plugins]] # markdownのクゥオート内シンタックス
-repo = 'joker1007/vim-markdown-quote-syntax'
-on_ft = ['markdown', 'mkd']
-
-[[plugins]] # markdownのPreview
-repo = 'kannokanno/previm'
-on_ft = ['markdown', 'mkd']
-
-[[plugins]] # ブラウザ起動
-repo = 'tyru/open-browser.vim'
-on_ft = ['markdown', 'mkd']
-
-[[plugins]] # tomlのシンタックス
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
-
-[[plugins]] # jsonのシンタックス
-repo = 'elzr/vim-json'
-on_ft = 'json'
+# [[plugins]] # カラースキーマ
+# repo = 'w0ng/vim-hybrid'

@@ -59,7 +59,7 @@ set incsearch
 set viminfo='20,\"1000
 set clipboard=unnamed
 set background=dark
-set termguicolors
+set cursorline
 colorscheme Tomorrow-Night-Bright
 
 hi clear CursorLine
@@ -74,6 +74,7 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 autocmd BufWritePre * :%s/\s\+$//ge
 " Tab to space
 autocmd BufWritePre * :%s/\t/  /ge
+autocmd! BufWritePost * Neomake
 
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
 autocmd FileType php setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
@@ -83,23 +84,25 @@ autocmd BufNewFile,BufRead *.scss set filetype=css
 autocmd BufNewFile,BufRead *.slim set filetype=slim
 
 " previm
-let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_folding_disabled = 1
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
+" unite
+let g:unite_enable_start_insert = 1
+let g:unite_source_file_mru_limit = 200
+
 " mru,reg,buf
-noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-noremap :ur :<C-u>Unite register -buffer-name=register<CR>
-noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
+nnoremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+nnoremap :ur :<C-u>Unite register -buffer-name=register<CR>
+nnoremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
+nnoremap <C-p> :Unite file_rec/async<CR>
 
-" file current_dir
-noremap :ufc :<C-u>Unite file -buffer-name=file<CR>
-noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
-
-" file file_current_dir
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+endif
 
 " to shutdown wiht ESC ESC
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
@@ -107,10 +110,6 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 " NerdTree
 noremap <silent> <C-e> :NERDTree<CR>
-
-" quirck run
-let g:quickrun_no_default_key_mappings = 1
-nmap <unique> <C-r> <Plug>(quickrun)
 
 " devdocs
 nmap K <Plug>(devdocs-under-cursor)

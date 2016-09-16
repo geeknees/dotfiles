@@ -22,8 +22,6 @@ local WHITE=$'%{\e[1;37m%}'        # 白色
 local DEFAULT=$white               # 標準の色
 
 setopt prompt_subst
-PROMPT=" $red%{%}$red%T$YELLOW@%m:$GREEN%~$HOSTNAME
-⚡ $DEFAULT"
 
 autoload vcs_info
 # gitのみ有効にする
@@ -65,6 +63,9 @@ my_vcs_info () {
   vcs_info
   echo $(my_git_info_stash)$(my_git_info_push)$vcs_info_msg_0_
 }
+
+PROMPT=" $RED%{%}$RED%T$YELLOW@%m:$GREEN%~$HOSTNAME
+⚡ $DEFAULT"
 RPROMPT=$'$(my_vcs_info)'
 
 # /=== PROMPT ===
@@ -111,7 +112,7 @@ export HOMEBREW_NO_ANALYTICS=1
 alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew"
 
 # For crontab
-export EDITOR=/usr/bin/vim
+export EDITOR=/usr/local/bin/vim
 
 # For node
 export NODE_PATH=/usr/local/lib/node:$PATH

@@ -20,8 +20,11 @@ repo = 'itchyny/lightline.vim'
 [[plugins]] # gitの変更点
 repo = 'airblade/vim-gitgutter'
 
+# [[plugins]]
+# repo = 'scrooloose/syntastic'
+
 [[plugins]]
-repo = 'scrooloose/syntastic'
+repo = 'neomake/neomake'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'

@@ -19,6 +19,11 @@ on_i = 1
 on_ft = ['snippet']
 
 [[plugins]]
+repo = 'Shougo/neocomplete.vim'
+if = 'has("lua")'
+on_i = 1
+
+[[plugins]]
 repo = 'Shougo/deoplete.nvim'
 if = 'has("nvim")'
 on_i = 1
@@ -33,19 +38,21 @@ on_i = 1
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
-on_cmd    = ['<C-e>', 'NERDtree']
+on_cmd = ['<C-e>', 'NERDtree']
 
-[[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-on_cmd    = ['<C-p>', 'CtrP']
+# [[plugins]]
+# repo = 'ctrlpvim/ctrlp.vim'
+# on_cmd    = ['CtrP']
 
 [[plugins]]
 repo = 'rhysd/devdocs.vim'
-on_cmd    = ['K', 'DevDocs']
+on_cmd = ['DevDocs']
+on_map = ['<Plug>(devdocs-under-cursor)']
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
-on_cmd    = ['<C-r>', 'QuickRun']
+on_cmd = ['QuickRun']
+on_map = ['<Plug>(quickrun)']
 
 ################################################
 # HTML CSS Javascript

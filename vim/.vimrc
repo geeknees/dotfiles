@@ -1,53 +1,43 @@
-"NeoBundle Scripts-----------------------------
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  " Required:
-  set runtimepath+=/Users/masumi/.vim/bundle/neobundle.vim/
+" dein settings {{{
+if &compatible
+  set nocompatible
 endif
+" dein.vimのディレクトリ
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" Required:
-call neobundle#begin(expand('/Users/masumi/.vim/bundle'))
+" なければgit clone
+if !isdirectory(s:dein_repo_dir)
+  execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+endif
+execute 'set runtimepath^=' . s:dein_repo_dir
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" Add or remove your Bundles here:
-NeoBundle 'Shougo/neosnippet.vim'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'flazz/vim-colorschemes'
+  " 管理するプラグインを記述したファイル
+  let g:rc_dir    = expand("~/.config/nvim/")
+  let s:toml      = g:rc_dir . 'dein.toml'
+  let s:lazy_toml = g:rc_dir . 'dein_lazy.toml'
+  call dein#load_toml(s:toml, {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
-" You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'ConradIrwin/vim-bracketed-paste'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'mattn/mkdpreview-vim'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'rhysd/devdocs.vim'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'vim-ruby/vim-ruby'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'itchyny/lightline.vim'
+  call dein#end()
+  call dein#save_state()
+endif
+" プラグインの追加・削除やtomlファイルの設定を変更した後は
+" 適宜 call dein#update や call dein#clear_state を呼んでください。
+" そもそもキャッシュしなくて良いならload_state/save_stateを呼ばないようにしてください。
 
-" Required:
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
-"End NeoBundle Scripts-------------------------
+" vimprocだけは最初にインストールしてほしい
+if dein#check_install(['vimproc'])
+  call dein#install(['vimproc'])
+endif
+" その他インストールしていないものはこちらに入れる
+if dein#check_install()
+  call dein#install()
+endif
+" }}}
 
 syntax on
 set number
@@ -70,6 +60,8 @@ set viminfo='20,\"1000
 set clipboard=unnamed
 set laststatus=2
 set background=dark
+set cursorline
+" colorscheme Tomorrow-Night-Bright
 
 hi clear CursorLine
 hi CursorLine ctermbg=darkblue guibg=black
@@ -91,24 +83,29 @@ autocmd BufNewFile,BufRead *.less set filetype=css
 autocmd BufNewFile,BufRead *.scss set filetype=css
 autocmd BufNewFile,BufRead *.slim set filetype=slim
 
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+
 " previm
-let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_folding_disabled = 1
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
+" unite
+let g:unite_enable_start_insert = 1
+let g:unite_source_file_mru_limit = 200
+
 " mru,reg,buf
-noremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-noremap :ur :<C-u>Unite register -buffer-name=register<CR>
-noremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
+nnoremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
+nnoremap :ur :<C-u>Unite register -buffer-name=register<CR>
+nnoremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
+nnoremap <C-p> :Unite file_rec/async<CR>
 
-" file current_dir
-noremap :ufc :<C-u>Unite file -buffer-name=file<CR>
-noremap :ufcr :<C-u>Unite file_rec -buffer-name=file_rec<CR>
-
-" file file_current_dir
-noremap :uff :<C-u>UniteWithBufferDir file -buffer-name=file<CR>
-noremap :uffr :<C-u>UniteWithBufferDir file_rec -buffer-name=file_rec<CR>
+" unite grep に ag(The Silver Searcher) を使う
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+endif
 
 " to shutdown wiht ESC ESC
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
@@ -116,10 +113,6 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 " NerdTree
 noremap <silent> <C-e> :NERDTree<CR>
-
-" quirck run
-let g:quickrun_no_default_key_mappings = 1
-nmap <unique> <C-r> <Plug>(quickrun)
 
 " devdocs
 nmap K <Plug>(devdocs-under-cursor)

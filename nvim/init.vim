@@ -39,20 +39,20 @@ if dein#check_install()
 endif
 " }}}
 
-syntax on
+filetype plugin indent on
+syntax enable
+
 set number
 set noswapfile
 set list
 set listchars=tab:^.
 set backspace=indent,eol,start
-set showmatch
 set hlsearch
 set encoding=utf-8
 set termencoding=utf-8
 set fileencodings=utf-8
 set expandtab
 set tabstop=2 shiftwidth=2 softtabstop=2
-set noautoindent
 set ignorecase
 set smartcase
 set incsearch
@@ -62,8 +62,10 @@ set background=dark
 set cursorline
 colorscheme Tomorrow-Night-Bright
 
+" let loaded_matchparen = 1
+
 hi clear CursorLine
-hi CursorLine ctermbg=darkblue guibg=black
+hi CursorLine ctermbg=239 guibg=black
 
 highlight ZenkakuSpace ctermbg=6
 match ZenkakuSpace /\s\+$\|　/
@@ -74,10 +76,12 @@ nmap <Esc><Esc> :nohlsearch<CR><Esc>
 autocmd BufWritePre * :%s/\s\+$//ge
 " Tab to space
 autocmd BufWritePre * :%s/\t/  /ge
-autocmd! BufWritePost * Neomake
+
+" Syntastic
+" autocmd! BufWritePost * Neomake
+" let g:syntastic_check_on_wq = 0
 
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
-autocmd FileType php setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.less set filetype=css
 autocmd BufNewFile,BufRead *.scss set filetype=css

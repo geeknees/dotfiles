@@ -21,52 +21,23 @@ local LIGHT_BLUE=$'%{\e[1;36m%}'   # 水色
 local WHITE=$'%{\e[1;37m%}'        # 白色
 local DEFAULT=$white               # 標準の色
 
-setopt prompt_subst
-
-autoload vcs_info
-# gitのみ有効にする
-zstyle ":vcs_info:*" enable git
-# commitしていない変更をチェックする
-zstyle ":vcs_info:git:*" check-for-changes true
-# gitリポジトリに対して、変更情報とリポジトリ情報を表示する
-zstyle ":vcs_info:git:*" formats "%c%u[%b:%r]"
-# gitリポジトリに対して、コンフリクトなどの情報を表示する
-zstyle ":vcs_info:git:*" actionformats "%c%u<%a>[%b:%r]"
-# addしていない変更があることを示す文字列
-zstyle ":vcs_info:git:*" unstagedstr "<U>"
-# commitしていないstageがあることを示す文字列
-zstyle ":vcs_info:git:*" stagedstr "<S>"
-
-# git：まだpushしていないcommitあるかチェックする
-my_git_info_push () {
-  if [ "$(git remote 2>/dev/null)" != "" ]; then
-    local head="$(git rev-parse HEAD)"
-    local remote
-    for remote in $(git rev-parse --remotes) ; do
-      if [ "$head" = "$remote" ]; then return 0 ; fi
-    done
-    # pushしていないcommitがあることを示す文字列
-    echo "<P>"
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-completions"
+zplug "supercrabtree/k"
+zplug "mafredri/zsh-async"
+zplug "sindresorhus/pure"
+if ! zplug check --verbose; then
+  printf 'Install? [y/N]: '
+  if read -q; then
+    echo; zplug install
   fi
-}
+fi
+zplug load --verbose
 
-# git：stashに退避したものがあるかチェックする
-my_git_info_stash () {
-  if [ "$(git stash list 2>/dev/null)" != "" ]; then
-    # stashがあることを示す文字列
-    echo "{s}"
-  fi
-}
-
-# vcs_infoの出力に独自の出力を付加する
-my_vcs_info () {
-  vcs_info
-  echo $(my_git_info_stash)$(my_git_info_push)$vcs_info_msg_0_
-}
-
-PROMPT=" $RED%{%}$RED%T$YELLOW@%m:$GREEN%~$HOSTNAME
-⚡ $DEFAULT"
-RPROMPT=$'$(my_vcs_info)'
+PROMPT="⚡ "
+RPROMPT="$GRAY %w %*"
 
 # /=== PROMPT ===
 
@@ -82,13 +53,9 @@ setopt hist_ignore_dups
 setopt hist_no_store
 setopt hist_reduce_blanks
 
-autoload -U compinit && compinit
-
 export XDG_CONFIG_HOME=$HOME/.config
-export LSCOLORS=gxfxcxdxbxegedabagacad
 
 alias ls='ls -vG'
-alias ll='ls -la'
 alias cp="cp -p"
 alias mv="mv -i"
 alias rm="rm -i"
@@ -96,8 +63,10 @@ alias vi="nvim"
 alias g="git"
 alias gits="git status"
 alias gitb="git branch"
+alias gitc="git checkout"
 alias t='todo.sh -t -d ~/Dropbox/PlainText/.todo.cfg'
 
+alias remem='du -sx / &> /dev/null & sleep 25 && kill $!'
 alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias amemo='atom ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias random-text='openssl rand -base64 12 | fold -w 10 | head -1'
@@ -112,7 +81,7 @@ export HOMEBREW_NO_ANALYTICS=1
 alias brew="env PATH=${PATH/${HOME}\/\.pyenv\/shims:/} brew"
 
 # For crontab
-export EDITOR=/usr/local/bin/vim
+export EDITOR=/usr/local/bin/nvim
 
 # For node
 export NODE_PATH=/usr/local/lib/node:$PATH
@@ -122,10 +91,7 @@ export PATH=/usr/local/share/npm/bin:$PATH
 export LC_ALL="en_US.UTF-8"
 
 # For z
- . `brew --prefix`/etc/profile.d/z.sh
-function precmd () {
-  z --add "$(pwd -P)"
-}
+ . /usr/local/etc/profile.d/z.sh
 
 # Roswell - Common Lisp environment setup Utility.
 export PATH="$PATH:$HOME/.roswell/bin"
@@ -143,8 +109,10 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
+# Android
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
 # rvm
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-# iterm2
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

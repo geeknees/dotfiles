@@ -64,6 +64,7 @@ alias g="git"
 alias gits="git status"
 alias gitb="git branch"
 alias gitc="git checkout"
+alias gitepr="git commit -m 'make pull request' --allow-empty"
 alias t='todo.sh -t -d ~/Dropbox/PlainText/.todo.cfg'
 
 alias remem='du -sx / &> /dev/null & sleep 25 && kill $!'

@@ -23,8 +23,8 @@ repo = 'airblade/vim-gitgutter'
 # [[plugins]]
 # repo = 'scrooloose/syntastic'
 
-[[plugins]]
-repo = 'neomake/neomake'
+# [[plugins]]
+# repo = 'neomake/neomake'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'

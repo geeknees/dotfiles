@@ -25,9 +25,12 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "mafredri/zsh-async", from:github
+zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
+zplug "rupa/z", use:"*.sh"
 zplug "supercrabtree/k"
-zplug "mafredri/zsh-async"
-zplug "sindresorhus/pure"
+
 if ! zplug check --verbose; then
   printf 'Install? [y/N]: '
   if read -q; then
@@ -36,7 +39,7 @@ if ! zplug check --verbose; then
 fi
 zplug load --verbose
 
-PROMPT="⚡ "
+PURE_PROMPT_SYMBOL="⚡ "
 RPROMPT="$GRAY %w %*"
 
 # /=== PROMPT ===
@@ -66,12 +69,22 @@ alias gitb="git branch"
 alias gitc="git checkout"
 alias gitepr="git commit -m 'make pull request' --allow-empty"
 alias t='todo.sh -t -d ~/Dropbox/PlainText/.todo.cfg'
+alias h='habitica'
+alias ht='habitica todos'
+alias hs='habitica status'
 
 alias remem='du -sx / &> /dev/null & sleep 25 && kill $!'
 alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias amemo='atom ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias random-text='openssl rand -base64 12 | fold -w 10 | head -1'
 alias global-ip='curl ifconfig.io'
+alias chrome-c='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary'
+alias be='bundle exec'
+alias bes='bundle exec sidekiq -C config/sidekiq.yml'
+alias ber='bundle exec rspec'
+alias puma-dev-restart='pkill -USR1 puma-dev'
+alias jun='jupyter notebook'
+alias jul='jupyter lab'
 
 # gitignore ex: gi ruby >> .gitignore
 function gi() { curl https://www.gitignore.io/api/$@ ;}
@@ -88,11 +101,8 @@ export EDITOR=/usr/local/bin/nvim
 export NODE_PATH=/usr/local/lib/node:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 
-# For tig
-export LC_ALL="en_US.UTF-8"
-
-# For z
- . /usr/local/etc/profile.d/z.sh
+# For Yarn
+export PATH="$PATH:`yarn global bin`"
 
 # Roswell - Common Lisp environment setup Utility.
 export PATH="$PATH:$HOME/.roswell/bin"
@@ -101,8 +111,11 @@ export PATH="$PATH:$HOME/.roswell/bin"
 export PATH="$HOME/.pyenv/shims:$PATH"
 
 # caffe
-export PYTHONPATH=$HOME/caffe/python:$PYTHONPATH
-export CAFFE_ROOT=$HOME/caffe
+# export PYTHONPATH=$HOME/caffe/python:$PYTHONPATH
+# export CAFFE_ROOT=$HOME/caffe
+
+# jupyter swift
+export PYTHONPATH=$HOME/Library/Jupyter/kernels/jupyter-swift-kernel:$PYTHONPATH
 
 # go
 export GOPATH=$HOME/gocode

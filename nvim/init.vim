@@ -30,9 +30,9 @@ endif
 " そもそもキャッシュしなくて良いならload_state/save_stateを呼ばないようにしてください。
 
 " vimprocだけは最初にインストールしてほしい
-if dein#check_install(['vimproc'])
-  call dein#install(['vimproc'])
-endif
+" if dein#check_install(['vimproc'])
+"   call dein#install(['vimproc'])
+" endif
 " その他インストールしていないものはこちらに入れる
 if dein#check_install()
   call dein#install()

@@ -30,9 +30,9 @@ endif
 " そもそもキャッシュしなくて良いならload_state/save_stateを呼ばないようにしてください。
 
 " vimprocだけは最初にインストールしてほしい
-if dein#check_install(['vimproc'])
-  call dein#install(['vimproc'])
-endif
+" if dein#check_install(['vimproc'])
+"   call dein#install(['vimproc'])
+" endif
 " その他インストールしていないものはこちらに入れる
 if dein#check_install()
   call dein#install()
@@ -58,12 +58,8 @@ set smartcase
 set incsearch
 set viminfo='20,\"1000
 set clipboard=unnamed
-set laststatus=2
 set background=dark
 set cursorline
-" colorscheme Tomorrow-Night-Bright
-
-" let loaded_matchparen = 1
 
 hi clear CursorLine
 hi CursorLine ctermbg=239 guibg=black
@@ -78,21 +74,32 @@ autocmd BufWritePre * :%s/\s\+$//ge
 " Tab to space
 autocmd BufWritePre * :%s/\t/  /ge
 
-" Syntastic
-" autocmd! BufWritePost * Neomake
-" let g:syntastic_check_on_wq = 0
+" ALE
+highlight ALEError ctermbg=DarkMagenta
+highlight ALEErrorSign ctermbg=DarkMagenta
+highlight ALEErrorLine ctermbg=DarkMagenta
+let g:lightline_delphinus_colorscheme='nord_improved'
+" nr2char(...) is for describing icons from devicons
+let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
+let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
+let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
+let g:ale_echo_msg_format = '%severity%  %linter% - %s'
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = g:ale_echo_msg_error_str
+let g:ale_sign_warning = g:ale_echo_msg_warning_str
+let g:ale_statusline_format = [
+      \ g:ale_echo_msg_error_str . ' %d',
+      \ g:ale_echo_msg_warning_str . ' %d',
+      \ nr2char(0xf4a1) . '  ']
 
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
+autocmd BufNewFile,BufRead *.coffee.erb setlocal ft=coffee
+autocmd BufNewFile,BufRead *.coffee setlocal ft=coffee
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 autocmd BufNewFile,BufRead *.less set filetype=css
 autocmd BufNewFile,BufRead *.scss set filetype=css
 autocmd BufNewFile,BufRead *.slim set filetype=slim
-
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-
-" previm
-let g:vim_markdown_folding_disabled = 1
+let g:polyglot_disabled = ['markdown']
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
@@ -118,6 +125,3 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 " NerdTree
 noremap <silent> <C-e> :NERDTree<CR>
-
-" devdocs
-nmap K <Plug>(devdocs-under-cursor)

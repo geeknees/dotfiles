@@ -28,7 +28,7 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zplug "rupa/z", use:"*.sh"
+zplug "rupa/z", use:z.sh
 zplug "supercrabtree/k"
 
 if ! zplug check --verbose; then
@@ -39,7 +39,7 @@ if ! zplug check --verbose; then
 fi
 zplug load --verbose
 
-PURE_PROMPT_SYMBOL="⚡ "
+PURE_PROMPT_SYMBOL="⚡"
 RPROMPT="$GRAY %w %*"
 
 # /=== PROMPT ===

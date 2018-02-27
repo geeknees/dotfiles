@@ -17,14 +17,23 @@ repo = 'sheerun/vim-polyglot'
 [[plugins]] # ステータスバー
 repo = 'itchyny/lightline.vim'
 
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'delphinus/lightline-delphinus'
+
 [[plugins]] # gitの変更点
 repo = 'airblade/vim-gitgutter'
 
 # [[plugins]]
-# repo = 'scrooloose/syntastic'
-
-# [[plugins]]
 # repo = 'neomake/neomake'
+# hook_add = '''
+#   autocmd! BufWritePost,BufEnter * Neomake
+# '''
+
+[[plugins]]
+repo = 'w0rp/ale'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'

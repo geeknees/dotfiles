@@ -31,7 +31,7 @@ endif
 
 " vimprocだけは最初にインストールしてほしい
 " if dein#check_install(['vimproc'])
-"   call dein#install(['vimproc'])
+"  call dein#install(['vimproc'])
 " endif
 " その他インストールしていないものはこちらに入れる
 if dein#check_install()
@@ -78,6 +78,8 @@ autocmd BufWritePre * :%s/\t/  /ge
 highlight ALEError ctermbg=DarkMagenta
 highlight ALEErrorSign ctermbg=DarkMagenta
 highlight ALEErrorLine ctermbg=DarkMagenta
+let g:ale_lint_on_enter = 0
+let g:ale_sign_column_always = 1
 let g:lightline_delphinus_colorscheme='nord_improved'
 " nr2char(...) is for describing icons from devicons
 let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '

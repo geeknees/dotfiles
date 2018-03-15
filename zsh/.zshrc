@@ -28,7 +28,7 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "mafredri/zsh-async", from:github
 zplug "sindresorhus/pure", use:pure.zsh, from:github, as:theme
-zplug "rupa/z", use:z.sh
+zplug "rupa/z", use:"*.sh"
 zplug "supercrabtree/k"
 
 if ! zplug check --verbose; then
@@ -63,7 +63,7 @@ alias cp="cp -p"
 alias mv="mv -i"
 alias rm="rm -i"
 alias vi="nvim"
-alias g="git"
+alias g='cd $(ghq root)/$(ghq list | peco)'
 alias gits="git status"
 alias gitb="git branch"
 alias gitc="git checkout"
@@ -101,11 +101,8 @@ export EDITOR=/usr/local/bin/nvim
 export NODE_PATH=/usr/local/lib/node:$PATH
 export PATH=/usr/local/share/npm/bin:$PATH
 
-# For Yarn
-export PATH="$PATH:`yarn global bin`"
-
-# Roswell - Common Lisp environment setup Utility.
-export PATH="$PATH:$HOME/.roswell/bin"
+# For yarn
+export PATH=$(yarn global bin):$PATH
 
 # pyenv
 export PATH="$HOME/.pyenv/shims:$PATH"
@@ -114,7 +111,7 @@ export PATH="$HOME/.pyenv/shims:$PATH"
 # export PYTHONPATH=$HOME/caffe/python:$PYTHONPATH
 # export CAFFE_ROOT=$HOME/caffe
 
-# jupyter swift
+# jupyter-swift
 export PYTHONPATH=$HOME/Library/Jupyter/kernels/jupyter-swift-kernel:$PYTHONPATH
 
 # go
@@ -123,10 +120,7 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
-# Android
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
-
 # rvm
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export PATH="$(brew --prefix qt@5.5)/bin:$PATH"

@@ -6,9 +6,6 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
 repo = 'Shougo/vimshell'
 
 [[plugins]]
@@ -24,22 +21,34 @@ repo = 'ryanoasis/vim-devicons'
 repo = 'delphinus/lightline-delphinus'
 
 [[plugins]] # gitの変更点
-repo = 'airblade/vim-gitgutter'
-
-# [[plugins]]
-# repo = 'neomake/neomake'
-# hook_add = '''
-#   autocmd! BufWritePost,BufEnter * Neomake
-# '''
+repo = 'mhinz/vim-signify'
 
 [[plugins]]
-repo = 'w0rp/ale'
+repo = 'thinca/vim-ref'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'w0rp/ale'
 
 [[plugins]] # カラースキーマ
 repo = 'chriskempson/vim-tomorrow-theme'
 
 # [[plugins]] # カラースキーマ
 # repo = 'w0ng/vim-hybrid'
+
+################################################
+# Oni
+################################################
+[[plugins]]
+repo = 'wellle/targets.vim'
+
+[[plugins]] # コメント機能
+repo = 'tpope/vim-commentary'
+
+[[plugins]]
+repo ='tpope/vim-surround'
+
+[[plugins]]
+repo = 'tpope/vim-unimpaired'

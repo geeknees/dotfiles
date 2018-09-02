@@ -1,36 +1,22 @@
 [[plugins]]
 repo = 'Shougo/neomru.vim'
-on_if = 1
+on_source = ['denite.nvim']
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'Denite'
+depends = ['neomru.vim']
+if = 'has("python3")'
+hook_source = 'source ~/.config/nvim/plugins-denite.vim'
 
 [[plugins]]
 repo = 'jiangmiao/auto-pairs'
 on_i = 1
 
 [[plugins]]
-repo = 'Shougo/neoyank.vim'
-on_if = 1
-on_event = 'TextYankPost'
-on_source = 'unite.vim'
-
-[[plugins]]
-repo = 'Shougo/neosnippet'
-depends = ['neosnippet-snippets']
-on_i = 1
-on_ft = ['snippet']
-
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-if = 'has("lua")'
-on_i = 1
-
-[[plugins]]
 repo = 'Shougo/deoplete.nvim'
 if = 'has("nvim")'
 on_i = 1
-
-[[plugins]]
-repo = 'Shougo/unite.vim'
-depends = 'neomru.vim'
 
 [[plugins]]
 repo = 'ConradIrwin/vim-bracketed-paste'
@@ -40,14 +26,10 @@ on_i = 1
 repo = 'scrooloose/nerdtree'
 on_cmd = ['<C-e>', 'NERDtree']
 
-# [[plugins]]
-# repo = 'ctrlpvim/ctrlp.vim'
-# on_cmd    = ['CtrP']
-
-# [[plugins]]
-# repo = 'rhysd/devdocs.vim'
-# on_cmd = ['DevDocs']
-# on_map = ['<Plug>(devdocs-under-cursor)']
+[[plugins]]
+repo = 'rhysd/devdocs.vim'
+on_cmd = ['DevDocs']
+on_map = ['<Plug>(devdocs-under-cursor)']
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -66,17 +48,35 @@ on_ft = 'ruby'
 repo = 'tpope/vim-rails'
 on_ft = 'ruby'
 
+[[plugins]] # ローカル変数ハイライト
+repo = 'todesking/ruby_hl_lvar.vim'
+on_ft = 'ruby'
+if = 'has("ruby")'
+
 [[plugins]]
 repo = 'kchmck/vim-coffee-script'
 on_ft = 'coffee'
 
+
+################################################
+# JS
+################################################
+
+[[plugins]]
+repo = 'pangloss/vim-javascript'
+on_ft = ['javascript', 'javascript.jsx']
+
+[[plugins]]
+repo = 'mxw/vim-jsx'
+on_ft = ['javascript', 'javascript.jsx']
+
+[[plugins]]
+repo = 'posva/vim-vue'
+on_ft = ['vue']
+
 ################################################
 # Other Files
 ################################################
-
-# [[plugins]] # markdownのtableの整形
-# repo = 'godlygeek/tabular'
-# on_ft = ['markdown', 'mkd', 'md']
 
 [[plugins]] # markdownのクゥオート内シンタックス
 repo = 'joker1007/vim-markdown-quote-syntax'

@@ -39,7 +39,7 @@ if ! zplug check --verbose; then
 fi
 zplug load --verbose
 
-PURE_PROMPT_SYMBOL="⚡"
+PURE_PROMPT_SYMBOL="👺"
 RPROMPT="$GRAY %w %*"
 
 # /=== PROMPT ===
@@ -76,9 +76,7 @@ alias hs='habitica status'
 alias remem='du -sx / &> /dev/null & sleep 25 && kill $!'
 alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias amemo='atom ~/Dropbox/work/memo/$(date +%Y%m%d).md'
-alias random-text='openssl rand -base64 12 | fold -w 10 | head -1'
 alias global-ip='curl ifconfig.io'
-alias chrome-c='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary'
 alias be='bundle exec'
 alias bes='bundle exec sidekiq -C config/sidekiq.yml'
 alias ber='bundle exec rspec'
@@ -104,21 +102,22 @@ export PATH=/usr/local/share/npm/bin:$PATH
 # For yarn
 export PATH=$(yarn global bin):$PATH
 
-# pyenv
 export PATH="$HOME/.pyenv/shims:$PATH"
 
 # caffe
 # export PYTHONPATH=$HOME/caffe/python:$PYTHONPATH
 # export CAFFE_ROOT=$HOME/caffe
 
-# jupyter-swift
-export PYTHONPATH=$HOME/Library/Jupyter/kernels/jupyter-swift-kernel:$PYTHONPATH
-
 # go
 export GOPATH=$HOME/gocode
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+# cuda
+export CUDA_HOME=/usr/local/cuda
+export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
+export PATH="$CUDA_HOME/bin:$PATH"
 
 # rvm
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

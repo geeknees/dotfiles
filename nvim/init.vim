@@ -31,7 +31,7 @@ endif
 
 " vimprocだけは最初にインストールしてほしい
 " if dein#check_install(['vimproc'])
-"  call dein#install(['vimproc'])
+"   call dein#install(['vimproc'])
 " endif
 " その他インストールしていないものはこちらに入れる
 if dein#check_install()
@@ -79,6 +79,9 @@ autocmd BufWritePre * :%s/\t/  /ge
 highlight ALEError ctermbg=DarkMagenta
 highlight ALEErrorSign ctermbg=DarkMagenta
 highlight ALEErrorLine ctermbg=DarkMagenta
+highlight ALEWarning ctermfg=yellow
+highlight ALEWarningSign ctermfg=yellow
+" highlight ALEWarningLine cterm=underline ctermfg=yellow
 let g:ale_lint_on_enter = 0
 let g:ale_sign_column_always = 1
 let g:lightline_delphinus_colorscheme='nord_improved'
@@ -87,7 +90,6 @@ let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
 let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
 let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
 let g:ale_echo_msg_format = '%severity%  %linter% - %s'
-let g:ale_sign_column_always = 1
 let g:ale_sign_error = g:ale_echo_msg_error_str
 let g:ale_sign_warning = g:ale_echo_msg_warning_str
 let g:ale_statusline_format = [
@@ -99,32 +101,29 @@ autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
 autocmd BufNewFile,BufRead *.coffee.erb setlocal ft=coffee
 autocmd BufNewFile,BufRead *.coffee setlocal ft=coffee
 autocmd BufNewFile,BufRead *.md set filetype=markdown
-autocmd BufNewFile,BufRead *.less set filetype=css
 autocmd BufNewFile,BufRead *.scss set filetype=css
-autocmd BufNewFile,BufRead *.slim set filetype=slim
 let g:polyglot_disabled = ['markdown']
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
-" unite
-let g:unite_enable_start_insert = 1
-let g:unite_source_file_mru_limit = 200
-
-" mru,reg,buf
-nnoremap :um :<C-u>Unite file_mru -buffer-name=file_mru<CR>
-nnoremap :ur :<C-u>Unite register -buffer-name=register<CR>
-nnoremap :ub :<C-u>Unite buffer -buffer-name=buffer<CR>
-nnoremap <C-p> :Unite file_rec/async<CR>
-
-" unite grep に ag(The Silver Searcher) を使う
-if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-endif
-
-" to shutdown wiht ESC ESC
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+" denite
+nnoremap <C-p> :<C-u>Denite file_rec<CR>
+nnoremap <silent> :uu :<C-u>Denite file_mru -mode=normal buffer<CR>
+nnoremap <silent> :ub :<C-u>Denite buffer<CR>
 
 " NerdTree
 noremap <silent> <C-e> :NERDTree<CR>
+
+" DevDocs
+nmap K <Plug>(devdocs-under-cursor)
+
+" ref.vim
+let g:ref_open = 'vsplit'
+let g:ref_refe_cmd = $HOME.'/.rvm/gems/ruby-2.5.0/bin/refe'
+let g:ref_refe_version = 2
+
+" vue
+let g:vue_disable_pre_processors = 1
+
+

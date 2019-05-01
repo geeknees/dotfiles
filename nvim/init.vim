@@ -63,7 +63,12 @@ set cursorline
 colorscheme Tomorrow-Night-Bright
 
 hi clear CursorLine
-hi CursorLine ctermbg=239 guibg=black
+hi CursorLine ctermbg=234 guibg=black
+
+set spell
+set spelllang=en,cjk
+hi clear SpellBad
+hi SpellBad cterm=underline
 
 highlight ZenkakuSpace ctermbg=6
 match ZenkakuSpace /\s\+$\|　/
@@ -96,6 +101,9 @@ let g:ale_statusline_format = [
       \ g:ale_echo_msg_error_str . ' %d',
       \ g:ale_echo_msg_warning_str . ' %d',
       \ nr2char(0xf4a1) . '  ']
+let g:ale_fixers = {
+      \ 'javascript': ['prettier_standard'],
+      \ 'ruby': ['rubocop']}
 
 autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
 autocmd BufNewFile,BufRead *.coffee.erb setlocal ft=coffee
@@ -118,12 +126,25 @@ noremap <silent> <C-e> :NERDTree<CR>
 " DevDocs
 nmap K <Plug>(devdocs-under-cursor)
 
+" indent
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'denite']
+hi IndentGuidesOdd  ctermbg=darkgrey
+hi IndentGuidesEven ctermbg=black
+
 " ref.vim
 let g:ref_open = 'vsplit'
-let g:ref_refe_cmd = $HOME.'/.rvm/gems/ruby-2.5.0/bin/refe'
+let g:ref_refe_cmd = $HOME.'/.anyenv/envs/rbenv/shims/refe'
 let g:ref_refe_version = 2
 
+let g:ref_source_webdict_sites = {
+\   'wikipedia:ja': 'http://ja.wikipedia.org/wiki/%s',
+\   'weblio': 'http://ejje.weblio.jp/content/%s',
+\ }
+
+nmap ,rr :<C-U>Ref refe<Space>
+
 " vue
-let g:vue_disable_pre_processors = 1
-
-
+" let g:vue_disable_pre_processors = 1

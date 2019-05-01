@@ -1,4 +1,4 @@
-" denite grep に ag を使う
+" denite grep に rg を使う
 if executable('rg')
   call denite#custom#var('file_rec', 'command',
         \ ['rg', '--files', '--glob', '!.git'])

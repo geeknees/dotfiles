@@ -27,7 +27,10 @@ repo = 'mhinz/vim-signify'
 repo = 'thinca/vim-ref'
 
 [[plugins]]
-repo = 'Yggdroot/indentLine'
+repo = 'szw/vim-tags'
+
+[[plugins]]
+repo = 'nathanaelkane/vim-indent-guides'
 
 [[plugins]]
 repo = 'w0rp/ale'
@@ -41,6 +44,7 @@ repo = 'chriskempson/vim-tomorrow-theme'
 ################################################
 # Oni
 ################################################
+
 [[plugins]]
 repo = 'wellle/targets.vim'
 

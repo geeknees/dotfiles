@@ -17,7 +17,6 @@ source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
-zplug "mafredri/zsh-async", from:github
 POWERLEVEL9K_MODE='nerdfont-complete'
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 zplug "rupa/z", use:z.sh
@@ -86,8 +85,9 @@ export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # # brew
-export PATH="/usr/local/sbin:$PATH"
+# export PATH="/usr/local/sbin:$PATH"
 # export HOMEBREW_NO_ANALYTICS=1
+export PATH="/usr/local/sbin:$PATH"
 alias brew="env PATH=${PATH/\/Users\/${USER}\/.anyenv\/envs\/*env\/shims:/} brew"
 
 # # For node

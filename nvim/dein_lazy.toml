@@ -1,8 +1,4 @@
 [[plugins]]
-repo = 'Shougo/neomru.vim'
-on_source = ['denite.nvim']
-
-[[plugins]]
 repo = 'Shougo/denite.nvim'
 on_cmd = 'Denite'
 depends = ['neomru.vim']
@@ -10,12 +6,24 @@ if = 'has("python3")'
 hook_source = 'source ~/.config/nvim/plugins-denite.vim'
 
 [[plugins]]
-repo = 'jiangmiao/auto-pairs'
-on_i = 1
+repo = 'Shougo/neomru.vim'
+on_source = ['denite.nvim']
+
+[[plugins]]
+repo      = 'Jagua/vim-denite-ghq'
+on_source = ['denite.nvim']
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 if = 'has("nvim")'
+on_i = 1
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 0
+'''
+
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
 on_i = 1
 
 [[plugins]]
@@ -25,11 +33,17 @@ on_i = 1
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 on_cmd = ['<C-e>', 'NERDtree']
+hook_source = '''
+  noremap <silent> <C-e> :NERDTree<CR>
+'''
 
 [[plugins]]
 repo = 'rhysd/devdocs.vim'
 on_cmd = ['DevDocs']
 on_map = ['<Plug>(devdocs-under-cursor)']
+hook_source = '''
+  nmap K <Plug>(devdocs-under-cursor)
+'''
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -63,16 +77,16 @@ on_ft = 'coffee'
 ################################################
 
 [[plugins]]
-repo = 'pangloss/vim-javascript'
-on_ft = ['javascript', 'javascript.jsx']
+repo = 'othree/yajs.vim'
+on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx']
+
+[[plugins]]
+repo = 'HerringtonDarkholme/yats.vim'
+on_ft = ['typescript', 'typescript.tsx']
 
 [[plugins]]
 repo = 'mxw/vim-jsx'
-on_ft = ['javascript', 'javascript.jsx']
-
-[[plugins]]
-repo = 'posva/vim-vue'
-on_ft = ['vue']
+on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx']
 
 ################################################
 # Other Files

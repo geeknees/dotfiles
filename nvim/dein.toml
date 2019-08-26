@@ -6,9 +6,6 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'Shougo/vimshell'
-
-[[plugins]]
 repo = 'sheerun/vim-polyglot'
 
 [[plugins]] # ステータスバー
@@ -25,21 +22,71 @@ repo = 'mhinz/vim-signify'
 
 [[plugins]]
 repo = 'thinca/vim-ref'
+hook_add = '''
+  let g:ref_open = 'vsplit'
+  let g:ref_refe_cmd = $HOME.'/.anyenv/envs/rbenv/shims/refe'
+  let g:ref_refe_version = 2
+
+  let g:ref_source_webdict_sites = {
+  \   'wikipedia:ja': 'http://ja.wikipedia.org/wiki/%s',
+  \   'weblio': 'http://ejje.weblio.jp/content/%s',
+  \ }
+
+  nnoremap ,rr :<C-U>Ref refe<Space>
+'''
 
 [[plugins]]
 repo = 'szw/vim-tags'
 
 [[plugins]]
 repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_start_level = 2
+  let g:indent_guides_guide_size = 1
+  let g:indent_guides_exclude_filetypes = ['help', 'nerdtree', 'denite']
+  hi IndentGuidesOdd  ctermbg=darkgrey
+  hi IndentGuidesEven ctermbg=black
+'''
 
 [[plugins]]
 repo = 'w0rp/ale'
+hook_add = '''
+  highlight ALEError ctermbg=DarkMagenta
+  highlight ALEErrorSign ctermbg=DarkMagenta
+  highlight ALEErrorLine ctermbg=DarkMagenta
+  highlight ALEWarning ctermfg=yellow
+  highlight ALEWarningSign ctermfg=yellow
+  " highlight ALEWarningLine cterm=underline ctermfg=yellow
+  let g:ale_lint_on_enter = 0
+  let g:ale_sign_column_always = 1
+  let g:lightline_delphinus_colorscheme='nord_improved'
+  " nr2char(...) is for describing icons from devicons
+  let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
+  let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
+  let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
+  let g:ale_echo_msg_format = '%severity%  %linter% - %s'
+  let g:ale_sign_error = g:ale_echo_msg_error_str
+  let g:ale_sign_warning = g:ale_echo_msg_warning_str
+  let g:ale_statusline_format = [
+        \ g:ale_echo_msg_error_str . ' %d',
+        \ g:ale_echo_msg_warning_str . ' %d',
+        \ nr2char(0xf4a1) . '  ']
+
+  let g:ale_fixers = {
+        \ 'javascript': ['prettier_standard'],
+        \ 'ruby': ['rubocop']}
+
+  autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
+  autocmd BufNewFile,BufRead *.coffee.erb setlocal ft=coffee
+  autocmd BufNewFile,BufRead *.coffee setlocal ft=coffee
+  autocmd BufNewFile,BufRead *.md set filetype=markdown
+  autocmd BufNewFile,BufRead *.scss set filetype=css
+  let g:polyglot_disabled = ['markdown']
+'''
 
 [[plugins]] # カラースキーマ
 repo = 'chriskempson/vim-tomorrow-theme'
-
-# [[plugins]] # カラースキーマ
-# repo = 'w0ng/vim-hybrid'
 
 ################################################
 # Oni

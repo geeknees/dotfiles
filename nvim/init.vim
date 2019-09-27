@@ -69,6 +69,8 @@ set spell
 set spelllang=en,cjk
 hi clear SpellBad
 hi SpellBad cterm=underline
+hi clear SpellCap
+hi SpellCap cterm=underline,bold
 
 highlight ZenkakuSpace ctermbg=6
 match ZenkakuSpace /\s\+$\|　/
@@ -79,3 +81,10 @@ nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 autocmd BufWritePre * :%s/\s\+$//ge
 " Tab to space
 autocmd BufWritePre * :%s/\t/  /ge
+
+" 【Ctrl + d + b】 バッファを表示
+nnoremap <silent><C-d>b :<C-u>Denite buffer -split=floating file:new<CR>
+" 【Ctrl + d + f】 カレントディレクトリを表示
+nnoremap <silent><C-d>f :<C-u>Denite file -split=floating file:new<CR>
+" 【Ctrl + d + r】 カレントディレクトリ以下を再帰的に表示
+nnoremap <silent><C-d>r :<C-u>Denite file/rec -split=floating file:new<CR>

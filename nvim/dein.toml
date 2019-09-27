@@ -8,6 +8,12 @@ build = 'make'
 [[plugins]]
 repo = 'sheerun/vim-polyglot'
 
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+if = '''executable('node') && executable('yarn')'''
+build = './install.sh nightly'
+merged = '0'
+
 [[plugins]] # ステータスバー
 repo = 'itchyny/lightline.vim'
 
@@ -57,7 +63,7 @@ hook_add = '''
   highlight ALEErrorLine ctermbg=DarkMagenta
   highlight ALEWarning ctermfg=yellow
   highlight ALEWarningSign ctermfg=yellow
-  " highlight ALEWarningLine cterm=underline ctermfg=yellow
+  highlight ALEWarningLine cterm=underline ctermfg=yellow
   let g:ale_lint_on_enter = 0
   let g:ale_sign_column_always = 1
   let g:lightline_delphinus_colorscheme='nord_improved'
@@ -98,8 +104,8 @@ repo = 'wellle/targets.vim'
 [[plugins]] # コメント機能
 repo = 'tpope/vim-commentary'
 
-[[plugins]]
-repo ='tpope/vim-surround'
+# [[plugins]]
+# repo ='tpope/vim-surround'
 
-[[plugins]]
-repo = 'tpope/vim-unimpaired'
+# [[plugins]]
+# repo = 'tpope/vim-unimpaired'

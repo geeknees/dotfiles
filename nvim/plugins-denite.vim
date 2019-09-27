@@ -14,6 +14,13 @@ function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <Space>
   \ denite#do_map('toggle_select').'j'
 endfunction
+
+" Change denite default options
+let s:denite_default_options = {
+    \ 'split': 'floating',
+    \ }
+call denite#custom#option('default', s:denite_default_options)
+
 " denite grep に rg を使う
 if executable('rg')
   call denite#custom#var('file_rec', 'command',

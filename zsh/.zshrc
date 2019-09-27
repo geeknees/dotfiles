@@ -18,7 +18,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 POWERLEVEL9K_MODE='nerdfont-complete'
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 zplug "rupa/z", use:z.sh
 
 if ! zplug check --verbose; then
@@ -30,15 +29,7 @@ fi
 zplug load --verbose
 
 # === PROMPT ===
-
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs rbenv)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time root_indicator background_jobs date time)
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="👺 "
-POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
-POWERLEVEL9K_DATE_FORMAT="%D{%Y/%m/%d %a}"
-
+eval "$(starship init zsh)"
 # /=== PROMPT ===
 
 HISTFILE=$HOME/.zsh_history           # 履歴をファイルに保存する

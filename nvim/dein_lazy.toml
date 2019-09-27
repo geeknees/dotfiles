@@ -14,15 +14,6 @@ repo      = 'Jagua/vim-denite-ghq'
 on_source = ['denite.nvim']
 
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-if = 'has("nvim")'
-on_i = 1
-hook_source = '''
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_delay = 0
-'''
-
-[[plugins]]
 repo = 'jiangmiao/auto-pairs'
 on_i = 1
 
@@ -33,7 +24,7 @@ on_i = 1
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 on_cmd = ['<C-e>', 'NERDtree']
-hook_source = '''
+hook_add = '''
   noremap <silent> <C-e> :NERDTree<CR>
 '''
 
@@ -95,14 +86,6 @@ on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx']
 [[plugins]] # markdownのクゥオート内シンタックス
 repo = 'joker1007/vim-markdown-quote-syntax'
 on_ft = ['markdown', 'mkd', 'md']
-
-# [[plugins]] # markdownのPreview
-# repo = 'kannokanno/previm'
-# on_ft = ['markdown', 'mkd', 'md']
-
-# [[plugins]] # ブラウザ起動
-# repo = 'tyru/open-browser.vim'
-# on_ft = ['markdown', 'mkd', 'md']
 
 [[plugins]]
 repo = 'lilydjwg/colorizer'

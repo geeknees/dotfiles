@@ -13,6 +13,13 @@ repo = 'neoclide/coc.nvim'
 if = '''executable('node') && executable('yarn')'''
 build = './install.sh nightly'
 merged = '0'
+hook_add = '''
+let g:coc_global_extensions = [
+  \ 'coc-solargraph',
+  \ 'coc-tsserver',
+  \ 'coc-spell-checker'
+  \ ]
+'''
 
 [[plugins]] # ステータスバー
 repo = 'itchyny/lightline.vim'
@@ -80,8 +87,14 @@ hook_add = '''
         \ nr2char(0xf4a1) . '  ']
 
   let g:ale_fixers = {
-        \ 'javascript': ['prettier_standard'],
-        \ 'ruby': ['rubocop']}
+        \ 'ruby': ['rubocop', 'solargraph'],
+        \ 'javascript': ['prettier_standard', 'eslint'],
+        \ 'typescript': ['prettier_standard', 'eslint'],
+        \ 'rust': ['cargo'],
+        \ 'go': ['gofmt', 'golint'],
+        \ 'elixir': ['mix'],
+        \ 'python': ['pylint']
+        \ }
 
   autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
   autocmd BufNewFile,BufRead *.coffee.erb setlocal ft=coffee

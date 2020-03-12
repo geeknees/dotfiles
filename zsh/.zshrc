@@ -17,7 +17,7 @@ source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
-POWERLEVEL9K_MODE='nerdfont-complete'
+zplug "mafredri/zsh-async", from:github
 zplug "rupa/z", use:z.sh
 
 if ! zplug check --verbose; then
@@ -63,6 +63,7 @@ alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias be='bundle exec'
 alias bes='bundle exec sidekiq -C config/sidekiq.yml'
 alias ber='bundle exec rspec'
+alias puma-dev-restart='pkill -USR1 puma-dev'
 alias jun='jupyter notebook'
 alias jul='jupyter lab'
 
@@ -70,10 +71,9 @@ alias jul='jupyter lab'
 # function gi() { curl https://www.gitignore.io/api/$@ ;}
 
 # go
-export GOPATH=$HOME/gocode
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export GOPATH=$HOME/go
+export GOBIN=$HOME/go/bin
+export PATH=$PATH:$GOPATH/bin
 
 # # brew
 # export PATH="/usr/local/sbin:$PATH"
@@ -81,12 +81,9 @@ export PATH=$PATH:/usr/local/opt/go/libexec/bin
 export PATH="/usr/local/sbin:$PATH"
 alias brew="env PATH=${PATH/\/Users\/${USER}\/.anyenv\/envs\/*env\/shims:/} brew"
 
-# # For node
-# export NODE_PATH=/usr/local/lib/node:$PATH
-# export PATH=/usr/local/share/npm/bin:$PATH
-
-# # For Yarn
-# export PATH=$(yarn global bin):$PATH
+export CUDA_HOME=/usr/local/cuda
+export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
+export PATH="$CUDA_HOME/bin:$PATH"
 
 # env
 export PATH="$HOME/.anyenv/bin:$PATH"

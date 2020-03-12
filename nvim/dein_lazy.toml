@@ -53,15 +53,12 @@ on_ft = 'ruby'
 repo = 'tpope/vim-rails'
 on_ft = ['ruby', 'haml']
 
-[[plugins]] # ローカル変数ハイライト
-repo = 'todesking/ruby_hl_lvar.vim'
-on_ft = 'ruby'
-if = 'has("ruby")'
+repo = 'tpope/vim-haml'
+on_ft = 'haml'
 
 [[plugins]]
 repo = 'kchmck/vim-coffee-script'
 on_ft = 'coffee'
-
 
 ################################################
 # JS

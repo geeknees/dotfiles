@@ -24,8 +24,8 @@ let g:coc_global_extensions = [
 [[plugins]] # ステータスバー
 repo = 'itchyny/lightline.vim'
 
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
+# [[plugins]]
+# repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo = 'delphinus/lightline-delphinus'
@@ -71,23 +71,27 @@ hook_add = '''
   highlight ALEWarning ctermfg=yellow
   highlight ALEWarningSign ctermfg=yellow
   highlight ALEWarningLine cterm=underline ctermfg=yellow
+  let g:ale_lint_on_insert_leave = 0
   let g:ale_lint_on_enter = 0
+  let g:ale_fix_on_save = 1
   let g:ale_sign_column_always = 1
   let g:lightline_delphinus_colorscheme='nord_improved'
+
   " nr2char(...) is for describing icons from devicons
-  let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
-  let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
-  let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
-  let g:ale_echo_msg_format = '%severity%  %linter% - %s'
-  let g:ale_sign_error = g:ale_echo_msg_error_str
-  let g:ale_sign_warning = g:ale_echo_msg_warning_str
-  let g:ale_statusline_format = [
-        \ g:ale_echo_msg_error_str . ' %d',
-        \ g:ale_echo_msg_warning_str . ' %d',
-        \ nr2char(0xf4a1) . '  ']
+  " let g:ale_echo_msg_error_str = nr2char(0xf421) . ' '
+  " let g:ale_echo_msg_warning_str = nr2char(0xf420) . ' '
+  " let g:ale_echo_msg_info_str = nr2char(0xf05a) . ' '
+  " let g:ale_echo_msg_format = '%severity%  %linter% - %s'
+  " let g:ale_sign_error = g:ale_echo_msg_error_str
+  " let g:ale_sign_warning = g:ale_echo_msg_warning_str
+  " let g:ale_statusline_format = [
+  "       \ g:ale_echo_msg_error_str . ' %d',
+  "       \ g:ale_echo_msg_warning_str . ' %d',
+  "       \ nr2char(0xf4a1) . '  ']
 
   let g:ale_fixers = {
-        \ 'ruby': ['rubocop', 'solargraph'],
+        \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+        \ 'ruby': ['rubocop'],
         \ 'javascript': ['prettier_standard', 'eslint'],
         \ 'typescript': ['prettier_standard', 'eslint'],
         \ 'rust': ['cargo'],

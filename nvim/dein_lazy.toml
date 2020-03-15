@@ -29,14 +29,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'rhysd/devdocs.vim'
-on_cmd = ['DevDocs']
-on_map = ['<Plug>(devdocs-under-cursor)']
-hook_source = '''
-  nmap K <Plug>(devdocs-under-cursor)
-'''
-
-[[plugins]]
 repo = 'thinca/vim-quickrun'
 on_cmd = ['QuickRun']
 on_map = ['<Plug>(quickrun)']
@@ -56,25 +48,47 @@ on_ft = ['ruby', 'haml']
 repo = 'tpope/vim-haml'
 on_ft = 'haml'
 
-[[plugins]]
-repo = 'kchmck/vim-coffee-script'
-on_ft = 'coffee'
-
 ################################################
 # JS
 ################################################
 
 [[plugins]]
 repo = 'othree/yajs.vim'
-on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx']
+on_ft = ['javascript', 'typescript']
+
+################################################
+# Elixir
+################################################
 
 [[plugins]]
-repo = 'HerringtonDarkholme/yats.vim'
-on_ft = ['typescript', 'typescript.tsx']
+repo = 'elixir-editors/vim-elixir'
+on_ft = ['elixir']
 
 [[plugins]]
-repo = 'mxw/vim-jsx'
-on_ft = ['javascript', 'javascript.jsx', 'typescript', 'typescript.tsx']
+repo = 'mhinz/vim-mix-format'
+on_ft = ['elixir']
+hook_source = '''
+  let g:mix_format_on_save = 1
+'''
+
+################################################
+# Rust
+################################################
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = ['rust']
+hook_source = '''
+  let g:rustfmt_autosave = 1
+'''
+
+################################################
+# Go
+################################################
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = ['go']
 
 ################################################
 # Other Files

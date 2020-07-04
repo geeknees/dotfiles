@@ -2,21 +2,35 @@ export LANG=ja_JP.UTF-8
 export LC_ALL=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
 
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
-zplug "mafredri/zsh-async", from:github
-zplug "rupa/z", use:z.sh
-
-if ! zplug check --verbose; then
-  printf 'Install? [y/N]: '
-  if read -q; then
-    echo; zplug install
-  fi
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
-zplug load --verbose
+
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node \
+
+### End of Zinit's installer chunk
+
+# Two regular plugins loaded without investigating.
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/fast-syntax-highlighting
+
+zinit ice wait'!0'; zinit load zsh-users/zsh-completions
+zinit ice wait'!0'; zinit light rupa/z
 
 # === PROMPT ===
 eval "$(starship init zsh)"
@@ -41,7 +55,7 @@ alias cp="cp -p"
 alias mv="mv -i"
 alias rm="rm -i"
 alias vi="nvim"
-alias g='cd $(ghq root)/$(ghq list | peco)'
+alias g='cd ~/ghq/$(ghq list | peco)'
 alias gits="git status"
 alias gitb="git branch"
 alias gitc="git checkout"
@@ -54,8 +68,13 @@ alias be='bundle exec'
 alias bes='bundle exec sidekiq -C config/sidekiq.yml'
 alias ber='bundle exec rspec'
 alias puma-dev-restart='pkill -USR1 puma-dev'
-alias jun='jupyter notebook'
 alias jul='jupyter lab'
+
+# Base16 Shell
+# BASE16_SHELL="$HOME/.config/base16-shell/"
+# [ -n "$PS1" ] && \
+#     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+#         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # gitignore ex: gi ruby >> .gitignore
 # function gi() { curl https://www.gitignore.io/api/$@ ;}
@@ -66,15 +85,10 @@ export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOPATH/bin
 
 # # brew
-# export PATH="/usr/local/sbin:$PATH"
 # export HOMEBREW_NO_ANALYTICS=1
 export PATH="/usr/local/sbin:$PATH"
 alias brew="env PATH=${PATH/\/Users\/${USER}\/.anyenv\/envs\/*env\/shims:/} brew"
 
-export CUDA_HOME=/usr/local/cuda
-export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
-export PATH="$CUDA_HOME/bin:$PATH"
-
 # env
 export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
+eval "$(anyenv init - --no-rehash)"

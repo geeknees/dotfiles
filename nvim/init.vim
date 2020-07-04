@@ -60,7 +60,12 @@ set viminfo='20,\"1000
 set clipboard=unnamed
 set background=dark
 set cursorline
-colorscheme Tomorrow-Night-Bright
+
+set termguicolors
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
 
 hi clear CursorLine
 hi CursorLine ctermbg=234 guibg=black
@@ -71,6 +76,10 @@ hi clear SpellBad
 hi SpellBad cterm=underline
 hi clear SpellCap
 hi SpellCap cterm=underline,bold
+
+" Enable dictionary auto-completion in Markdown files and Git Commit Messages
+autocmd FileType markdown setlocal complete+=kspell
+autocmd FileType gitcommit setlocal complete+=kspell
 
 highlight ZenkakuSpace ctermbg=6
 match ZenkakuSpace /\s\+$\|　/

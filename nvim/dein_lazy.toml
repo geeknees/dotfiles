@@ -45,6 +45,7 @@ on_ft = 'ruby'
 repo = 'tpope/vim-rails'
 on_ft = ['ruby', 'haml']
 
+[[plugins]]
 repo = 'tpope/vim-haml'
 on_ft = 'haml'
 
@@ -52,9 +53,9 @@ on_ft = 'haml'
 # JS
 ################################################
 
-[[plugins]]
-repo = 'othree/yajs.vim'
-on_ft = ['javascript', 'typescript']
+# [[plugins]]
+# repo = 'othree/yajs.vim'
+# on_ft = ['javascript', 'typescript']
 
 ################################################
 # Elixir

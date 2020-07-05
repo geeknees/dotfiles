@@ -1,0 +1,16 @@
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  required = true
+[user]
+  name = Masumi Kawasaki
+  email = mkawasaki@sbihg.co.jp
+[push]
+  default = simple
+[core]
+  quotepath = false
+  precomposeunicode = true
+  editor = nvim
+  pager = delta --theme='Monokai Extended'
+[interactive]
+  diffFilter = delta --color-only

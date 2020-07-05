@@ -29,7 +29,7 @@ zinit light-mode for \
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 
-zinit ice wait'!0'; zinit load zsh-users/zsh-completions
+zinit ice blockf; zinit load zsh-users/zsh-completions
 zinit ice wait'!0'; zinit light rupa/z
 
 # === PROMPT ===

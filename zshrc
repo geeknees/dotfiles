@@ -59,6 +59,8 @@ alias g='cd ~/ghq/$(ghq list | peco)'
 alias gits="git status"
 alias gitb="git branch"
 alias gitc="git checkout"
+alias gitsw="git switch"
+alias gitpf="git push --force-with-lease"
 alias gitepr="git commit -m 'make pull request' --allow-empty"
 alias t='todo.sh -t -d ~/Dropbox/PlainText/.todo.cfg'
 

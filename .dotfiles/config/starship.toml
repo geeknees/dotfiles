@@ -6,8 +6,13 @@ full_symbol = "🔋 "
 charging_symbol = "⚡️ "
 discharging_symbol = "💀 "
 
-[git_branch]
-symbol = "🌱 "
+# [git_branch]
+# symbol = "🌱 "
 
 [nodejs]
 format = "via [👾 $version](bold green) "
+
+[env_var]
+variable = "SHELL_ARCH"
+style = "bold yellow"
+format = "[$env_value]($style) "

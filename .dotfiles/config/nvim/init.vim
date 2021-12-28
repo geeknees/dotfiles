@@ -1,7 +1,14 @@
-" dein settings {{{
+"dein Scripts-----------------------------
+
 if &compatible
-  set nocompatible
+  set nocompatible               " Be iMproved
 endif
+
+" reset augroup
+augroup MyAutoCmd
+  autocmd!
+augroup END
+
 " dein.vimのディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -37,7 +44,8 @@ endif
 if dein#check_install()
   call dein#install()
 endif
-" }}}
+
+"End dein Scripts-------------------------
 
 filetype plugin indent on
 syntax enable
@@ -62,13 +70,16 @@ set background=dark
 set cursorline
 
 set termguicolors
+set t_8f=^[[38;2;%lu;%lu;%lum
+set t_8b=^[[48;2;%lu;%lu;%lum
+
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
 
-hi clear CursorLine
-hi CursorLine ctermbg=234 guibg=black
+" hi clear CursorLine
+" hi CursorLine ctermbg=234 guibg=black
 
 set spell
 set spelllang=en,cjk
@@ -81,9 +92,9 @@ hi SpellCap cterm=underline,bold
 autocmd FileType markdown setlocal complete+=kspell
 autocmd FileType gitcommit setlocal complete+=kspell
 
-highlight ZenkakuSpace ctermbg=6
+" highlight ZenkakuSpace ctermbg=6
+highlight ZenkakuSpace ctermbg=6 guibg=navy
 match ZenkakuSpace /\s\+$\|　/
-
 nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
 
 " Remove end of line spaces
@@ -91,9 +102,4 @@ autocmd BufWritePre * :%s/\s\+$//ge
 " Tab to space
 autocmd BufWritePre * :%s/\t/  /ge
 
-" 【Ctrl + d + b】 バッファを表示
-nnoremap <silent><C-d>b :<C-u>Denite buffer -split=floating file:new<CR>
-" 【Ctrl + d + f】 カレントディレクトリを表示
-nnoremap <silent><C-d>f :<C-u>Denite file -split=floating file:new<CR>
-" 【Ctrl + d + r】 カレントディレクトリ以下を再帰的に表示
-nnoremap <silent><C-d>r :<C-u>Denite file/rec -split=floating file:new<CR>
+let g:python3_host_prog="/usr/bin/python3"

@@ -57,6 +57,7 @@ alias cp="cp -p"
 alias mv="mv -i"
 alias rm="rm -i"
 alias vi="nvim"
+alias nv="neovide"
 alias g='cd ~/ghq/$(ghq list | peco)'
 alias gits="git status"
 alias gitb="git branch"
@@ -75,10 +76,10 @@ alias puma-dev-restart='pkill -USR1 puma-dev'
 alias jul='jupyter lab'
 
 # Base16 Shell
-# BASE16_SHELL="$HOME/.config/base16-shell/"
-# [ -n "$PS1" ] && \
-#     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-#         eval "$("$BASE16_SHELL/profile_helper.sh")"
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+[ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # gitignore ex: gi ruby >> .gitignore
 # function gi() { curl https://www.gitignore.io/api/$@ ;}
@@ -89,14 +90,13 @@ export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOPATH/bin
 
 # rust
-export PATH="$HOME/.cargo/bin:$PATH"
+# export PATH="$HOME/.cargo/bin:$PATH"
+
+# deno
+export PATH="$HOME/.deno/bin:$PATH"
 
 # brew
-# export HOMEBREW_NO_ANALYTICS=1
-export PATH="/usr/local/sbin:$PATH"
-
-# python
-export PATH=/usr/local/opt/python/libexec/bin:$PATH
+export HOMEBREW_NO_ANALYTICS=1
 
 # Autostart if not already in tmux.
 if [[ ! -n $TMUX && $- == *l* ]]; then
@@ -117,4 +117,25 @@ if [[ ! -n $TMUX && $- == *l* ]]; then
   fi
 fi
 
-. /usr/local/opt/asdf/asdf.sh
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+# m1 mac
+if [[ $(arch) == 'arm64' ]]; then
+  export PATH="$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+  export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
+  export PATH="/opt/homebrew/opt/python@3.9/libexec/bin:$PATH"
+  # export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+  # export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
+  # export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
+  # export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+  export SHELL_ARCH="arm64"
+  echo '🚀 arm64 '
+else
+  export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
+  export PATH="/usr/local/opt/node@14/bin:$PATH"
+  export PATH="/usr/local/opt/python@3.9/libexec/bin:$PATH"
+  export SHELL_ARCH="x86"
+  echo '👋 x86 '
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

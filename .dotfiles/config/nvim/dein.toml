@@ -28,7 +28,27 @@ repo = 'itchyny/lightline.vim'
 # repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
+repo = 'rebelot/kanagawa.nvim'
+hook_add = '''
+" colorscheme 設定は source 後に行う必要があるので VimEnter で行う。
+" 但し Colorscheme イベントの発生が抑制されないよう nented を付ける。
+au MyAutoCmd VimEnter * nested colorscheme kanagawa
+'''
+
+[[plugins]]
 repo = 'delphinus/lightline-delphinus'
+
+[[plugins]]
+repo = 'nanotee/zoxide.vim'
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = 0
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
 
 [[plugins]] # gitの変更点
 repo = 'mhinz/vim-signify'
@@ -37,6 +57,7 @@ repo = 'mhinz/vim-signify'
 repo = 'tpope/vim-fugitive'
 
 [[plugins]]
+# brew install lynx to use webdict
 repo = 'thinca/vim-ref'
 hook_add = '''
   let g:ref_open = 'vsplit'
@@ -73,6 +94,7 @@ hook_add = '''
   let g:ale_sign_column_always = 1
   let g:ale_completion_enabled = 1
   let g:lightline_delphinus_colorscheme='nord_improved'
+  let g:ale_javascript_prettier_options = '--no-semi --single-quote --jsx-single-quote --trailing-comma none'
 
   let g:ale_linters = {
         \ 'ruby': ['rubocop'],
@@ -86,14 +108,14 @@ hook_add = '''
 
 let g:ale_fixers = {
         \ '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \ 'javascript': ['eslint'],
-        \ 'typescript': ['eslint'],
+        \ 'javascript': ['prettier'],
+        \ 'javascriptreact': ['prettier'],
+        \ 'typescript': ['prettier'],
+        \ 'typescriptreact': ['prettier'],
         \ 'go': ['gofmt']
         \ }
 
   autocmd BufRead,BufNewFile *.erb set filetype=eruby.html
-  autocmd BufNewFile,BufRead *.coffee.erb setlocal ft=coffee
-  autocmd BufNewFile,BufRead *.coffee setlocal ft=coffee
   autocmd BufNewFile,BufRead *.md set filetype=markdown
   autocmd BufNewFile,BufRead *.scss set filetype=css
   autocmd BufNewFile,BufRead *.jsx set filetype=javascript.jsx
@@ -119,3 +141,13 @@ repo = 'tpope/vim-commentary'
 
 # [[plugins]]
 # repo = 'tpope/vim-unimpaired'
+
+################################################
+# deno
+################################################
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'vim-denops/denops-helloworld.vim'

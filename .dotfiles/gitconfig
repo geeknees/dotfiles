@@ -5,7 +5,7 @@
 	process = git-lfs filter-process
 [user]
   name = Masumi Kawasaki
-  email = mkawasaki@sbihg.co.jp
+	email = geeknees@gmail.com
 [push]
   default = simple
 [core]
@@ -13,9 +13,17 @@
   precomposeunicode = true
   editor = nvim
   pager = delta --theme='Monokai Extended'
+	excludesfile = /Users/masumi/.gitignore_global
 [interactive]
   diffFilter = delta --color-only
 [init]
 	defaultBranch = main
 [pull]
 	rebase = false
+[secrets]
+	providers = git secrets --aws-provider
+	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
+	patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
+	patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+	allowed = AKIAIOSFODNN7EXAMPLE
+	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY

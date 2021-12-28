@@ -1,19 +1,4 @@
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-on_cmd = 'Denite'
-depends = ['neomru.vim']
-if = 'has("python3")'
-hook_source = 'source ~/.config/nvim/plugins-denite.vim'
-
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-on_source = ['denite.nvim']
-
-[[plugins]]
-repo      = 'Jagua/vim-denite-ghq'
-on_source = ['denite.nvim']
-
-[[plugins]]
 repo = 'jiangmiao/auto-pairs'
 on_i = 1
 
@@ -22,7 +7,7 @@ repo = 'ConradIrwin/vim-bracketed-paste'
 on_i = 1
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
+repo = 'preservim/nerdtree'
 on_cmd = ['<C-e>', 'NERDtree']
 hook_add = '''
   noremap <silent> <C-e> :NERDTree<CR>

@@ -2,6 +2,7 @@
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   required = true
+	process = git-lfs filter-process
 [user]
   name = Masumi Kawasaki
   email = mkawasaki@sbihg.co.jp
@@ -14,3 +15,7 @@
   pager = delta --theme='Monokai Extended'
 [interactive]
   diffFilter = delta --color-only
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false

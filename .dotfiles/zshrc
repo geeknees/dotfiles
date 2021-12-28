@@ -30,7 +30,9 @@ zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
 
 zinit ice blockf; zinit load zsh-users/zsh-completions
-zinit ice wait'!0'; zinit light rupa/z
+# zinit ice wait'!0'; zinit light agkozak/zsh-z
+
+eval "$(zoxide init zsh)"
 
 # === PROMPT ===
 eval "$(starship init zsh)"
@@ -59,6 +61,8 @@ alias g='cd ~/ghq/$(ghq list | peco)'
 alias gits="git status"
 alias gitb="git branch"
 alias gitc="git checkout"
+alias gitsw="git switch"
+alias gitpf="git push --force-with-lease"
 alias gitepr="git commit -m 'make pull request' --allow-empty"
 alias t='todo.sh -t -d ~/Dropbox/PlainText/.todo.cfg'
 
@@ -84,11 +88,33 @@ export GOPATH=$HOME/go
 export GOBIN=$HOME/go/bin
 export PATH=$PATH:$GOPATH/bin
 
-# # brew
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# brew
 # export HOMEBREW_NO_ANALYTICS=1
 export PATH="/usr/local/sbin:$PATH"
-alias brew="env PATH=${PATH/\/Users\/${USER}\/.anyenv\/envs\/*env\/shims:/} brew"
 
-# env
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init - --no-rehash)"
+# python
+export PATH=/usr/local/opt/python/libexec/bin:$PATH
+
+# Autostart if not already in tmux.
+if [[ ! -n $TMUX && $- == *l* ]]; then
+  # get the IDs
+  ID="`tmux list-sessions`"
+  if [[ -z "$ID" ]]; then
+    tmux new-session
+  fi
+  create_new_session="Create New Session"
+  ID="$ID\n${create_new_session}:"
+  ID="`echo $ID | peco | cut -d: -f1`"
+  if [[ "$ID" = "${create_new_session}" ]]; then
+    tmux new-session
+  elif [[ -n "$ID" ]]; then
+    tmux attach-session -t "$ID"
+  else
+    :  # Start terminal normally
+  fi
+fi
+
+. /usr/local/opt/asdf/asdf.sh

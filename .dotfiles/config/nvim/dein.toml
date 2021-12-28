@@ -34,15 +34,18 @@ repo = 'delphinus/lightline-delphinus'
 repo = 'mhinz/vim-signify'
 
 [[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
 repo = 'thinca/vim-ref'
 hook_add = '''
   let g:ref_open = 'vsplit'
-  let g:ref_refe_cmd = $HOME.'/.anyenv/envs/rbenv/shims/refe'
-  let g:ref_refe_version = 2
+  let g:ref_refe_cmd = $HOME.'/.asdf/shims/refe'
 
   let g:ref_source_webdict_sites = {
   \   'wikipedia:ja': 'http://ja.wikipedia.org/wiki/%s',
   \   'weblio': 'http://ejje.weblio.jp/content/%s',
+  \   'alc': 'https://eow.alc.co.jp/search?q=%s',
   \ }
 
   nnoremap ,rr :<C-U>Ref refe<Space>

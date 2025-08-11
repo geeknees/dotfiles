@@ -1,0 +1,18 @@
+[tools]
+ruby = "latest"
+node = "latest"
+
+[tasks.rovodev]
+description = "Run rovodev"
+run = "acli rovodev run"
+
+[tasks.disc_usage_1G]
+description = "Display all directories using more than 5GB (requires sudo)"
+run = "sudo du -ghxd 5 / | awk '$1 >= 1{print}' | sort -k 2"
+
+[tasks.disc_usage_50M]
+description = "Display all directories using more than 50MB in the current directory"
+run = "du -mhxd 5 ./ | awk '$1 >= 50{print}' | sort -k 2"
+
+[settings]
+idiomatic_version_file_enable_tools = ["ruby", "node"]

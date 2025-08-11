@@ -1,5 +1,7 @@
 bundler
 refe2
 neovim
-solargraph
 debug
+ruby-lsp
+iruby
+irb-theme-rk2024

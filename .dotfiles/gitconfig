@@ -1,21 +1,25 @@
 [filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true
 	process = git-lfs filter-process
 [user]
-  name = Masumi Kawasaki
+	name = Masumi Kawasaki
 	email = geeknees@gmail.com
+	signingkey = 9E5903751D5634BF
 [push]
-  default = simple
+	default = simple
 [core]
-  quotepath = false
-  precomposeunicode = true
-  editor = nvim
-  pager = delta --theme='Monokai Extended'
-	excludesfile = /Users/masumi/.gitignore_global
+	quotepath = false
+	precomposeunicode = true
+	editor = nvim
+	pager = delta
+	excludesfile = /Users/masumi/.dotfiles/gitignore_global
+[delta]
+	syntax-theme = Monokai Extended
+	side-by-side = true
 [interactive]
-  diffFilter = delta --color-only
+	diffFilter = delta --color-only
 [init]
 	defaultBranch = main
 [pull]
@@ -25,5 +29,11 @@
 	patterns = (A3T[A-Z0-9]|AKIA|AGPA|AIDA|AROA|AIPA|ANPA|ANVA|ASIA)[A-Z0-9]{16}
 	patterns = (\"|')?(AWS|aws|Aws)?_?(SECRET|secret|Secret)?_?(ACCESS|access|Access)?_?(KEY|key|Key)(\"|')?\\s*(:|=>|=)\\s*(\"|')?[A-Za-z0-9/\\+=]{40}(\"|')?
 	patterns = (\"|')?(AWS|aws|Aws)?_?(ACCOUNT|account|Account)_?(ID|id|Id)?(\"|')?\\s*(:|=>|=)\\s*(\"|')?[0-9]{4}\\-?[0-9]{4}\\-?[0-9]{4}(\"|')?
+	patterns = 29a37b5d4cb3e6377b0f2c94f67767c13d3a260d19383c7d5fe3210567b94482
+	patterns = 060f118e69174ab6a6d4ba9fcd88055490934bc77ab31bef1fa83092ca912104
 	allowed = AKIAIOSFODNN7EXAMPLE
 	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+[gpg]
+	program = /opt/homebrew/bin/gpg
+[commit]
+	gpgsign = true

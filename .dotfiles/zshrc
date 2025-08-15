@@ -3,34 +3,31 @@ export LC_ALL=ja_JP.UTF-8
 export LC_CTYPE=ja_JP.UTF-8
 
 ### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
+    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
+    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
+        print -P "%F{33} %F{34}Installation successful.%f%b" || \
+        print -P "%F{160} The clone has failed.%f%b"
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node \
-
+   zdharma-continuum/zinit-annex-as-monitor \
+   zdharma-continuum/zinit-annex-bin-gem-node \
+   zdharma-continuum/zinit-annex-patch-dl \
+   zdharma-continuum/zinit-annex-rust
 ### End of Zinit's installer chunk
 
-# Two regular plugins loaded without investigating.
 zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma/fast-syntax-highlighting
-
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light nickbradley/aw-watcher-shell
 zinit ice blockf; zinit load zsh-users/zsh-completions
-# zinit ice wait'!0'; zinit light agkozak/zsh-z
 
 eval "$(zoxide init zsh)"
 
@@ -57,7 +54,6 @@ alias cp="cp -p"
 alias mv="mv -i"
 alias rm="rm -i"
 alias vi="nvim"
-alias nv="neovide"
 alias g='cd ~/ghq/$(ghq list | peco)'
 alias gits="git status"
 alias gitb="git branch"
@@ -65,66 +61,48 @@ alias gitc="git checkout"
 alias gitsw="git switch"
 alias gitpf="git push --force-with-lease"
 alias gitepr="git commit -m 'make pull request' --allow-empty"
+alias gitai='git commit -t <(git diff --staged | aichat -r commit)'
 alias t='todo.sh -t -d ~/Dropbox/PlainText/.todo.cfg'
-
 alias remem='du -sx / &> /dev/null & sleep 25 && kill $!'
-alias vmemo='vim ~/Dropbox/work/memo/$(date +%Y%m%d).md'
 alias be='bundle exec'
 alias bes='bundle exec sidekiq -C config/sidekiq.yml'
 alias ber='bundle exec rspec'
-alias puma-dev-restart='pkill -USR1 puma-dev'
-alias jul='jupyter lab'
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 # Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/"
-[ -n "$PS1" ] && \
-[ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-eval "$("$BASE16_SHELL/profile_helper.sh")"
+# BASE16_SHELL="$HOME/.config/base16-shell/"
+# [ -n "$PS1" ] && \
+# [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+# eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # gitignore ex: gi ruby >> .gitignore
 # function gi() { curl https://www.gitignore.io/api/$@ ;}
-
-# go
-export GOPATH=$HOME/go
-export GOBIN=$HOME/go/bin
-export PATH=$PATH:$GOPATH/bin
-
-# rust
-# export PATH="$HOME/.cargo/bin:$PATH"
-
-# deno
-export PATH="$HOME/.deno/bin:$PATH"
 
 # brew
 export HOMEBREW_NO_ANALYTICS=1
 
 # Autostart if not already in tmux.
-if [[ ! -n $TMUX && $- == *l* ]]; then
-  # get the IDs
-  ID="`tmux list-sessions`"
-  if [[ -z "$ID" ]]; then
-    tmux new-session
-  fi
-  create_new_session="Create New Session"
-  ID="$ID\n${create_new_session}:"
-  ID="`echo $ID | peco | cut -d: -f1`"
-  if [[ "$ID" = "${create_new_session}" ]]; then
-    tmux new-session
-  elif [[ -n "$ID" ]]; then
-    tmux attach-session -t "$ID"
-  else
-    :  # Start terminal normally
-  fi
-fi
-
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# if [[ ! -n $TMUX && $- == *l* ]]; then
+#   # get the IDs
+#   ID="`tmux list-sessions`"
+#   if [[ -z "$ID" ]]; then
+#     tmux new-session
+#   fi
+#   create_new_session="Create New Session"
+#   ID="$ID\n${create_new_session}:"
+#   ID="`echo $ID | peco | cut -d: -f1`"
+#   if [[ "$ID" = "${create_new_session}" ]]; then
+#     tmux new-session
+#   elif [[ -n "$ID" ]]; then
+#     tmux attach-session -t "$ID"
+#   else
+#     :  # Start terminal normally
+#   fi
+# fi
 
 # m1 mac
 if [[ $(arch) == 'arm64' ]]; then
   export PATH="$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-  export PATH="/opt/homebrew/opt/node@14/bin:$PATH"
-  export PATH="/opt/homebrew/opt/python@3.9/libexec/bin:$PATH"
-  # export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
   # export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
   # export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
   # export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
@@ -132,10 +110,29 @@ if [[ $(arch) == 'arm64' ]]; then
   echo '🚀 arm64 '
 else
   export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-  export PATH="/usr/local/opt/node@14/bin:$PATH"
-  export PATH="/usr/local/opt/python@3.9/libexec/bin:$PATH"
   export SHELL_ARCH="x86"
   echo '👋 x86 '
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export PATH="$PATH:/Users/masumi/.foundry/bin"
+
+# __NSPlaceholderDictionary
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+export RUBYOPT=--yjit
+
+eval "$(mise activate zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/masumi/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+alias claude="/Users/masumi/.claude/local/claude"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

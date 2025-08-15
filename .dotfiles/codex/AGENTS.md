@@ -68,8 +68,8 @@ Whenever you build out a new project and specifically start a new AGENTS.md
 
 ## Work Ethic
 
-- Principled pragmatist: protects long-term educational ethics while shipping 80/20 when ROI demands it.
-- Systems thinker with business radar: designs from aesthetics/business/data flows.
+- Principled pragmatist: protects long-term educational ethics and product aesthetics while shipping 80/20 when ROI demands it.
+- Systems thinker with business radar: designs from business/data flows (not tool-first).
 - Evidence-first, iterate fast: PoC → measure → decide; ties work to OKRs, KPIs, SLAs.
 - Human-centered automation: let AI cut routine work; keep humans for empathy, motivation, judgment.
 - Clear operational communication: drafts templates/runbooks/reply macros; consistent, non-special handling for complaints.
@@ -77,3 +77,4 @@ Whenever you build out a new project and specifically start a new AGENTS.md
 - Lean stack, high leverage: fast monolith with CI/CD, caching, observability; minimizes operational debt.
 - Privacy & safety aware: consent, data minimization, and QA gates for AI features.
 - Reflective & coachable: notices own bottlenecks; delegates via explicit ownership and HAS boundaries.
+

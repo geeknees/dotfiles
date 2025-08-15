@@ -1,2 +1,4 @@
 # zmodload zsh/zprof && zprof
 . "$HOME/.cargo/env"
+
+export PATH="$PATH:/Users/masumi/.config/.foundry/bin"

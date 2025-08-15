@@ -1,4 +1,12 @@
 *~
 .DS_Store
 vendor/bundle
+bundle_bin
 .vscode/
+.tool-versions
+.rtx.toml
+.mise.toml
+.env
+database
+
+tmp_code_*

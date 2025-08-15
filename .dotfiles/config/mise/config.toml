@@ -1,13 +1,14 @@
 [tools]
 ruby = "latest"
 node = "latest"
+python = "3.12"
 
 [tasks.rovodev]
-description = "Run rovodev"
+description = "Run rovo dev"
 run = "acli rovodev run"
 
 [tasks.disc_usage_1G]
-description = "Display all directories using more than 5GB (requires sudo)"
+description = "Display all directories using more than 1GB (requires sudo)"
 run = "sudo du -ghxd 5 / | awk '$1 >= 1{print}' | sort -k 2"
 
 [tasks.disc_usage_50M]

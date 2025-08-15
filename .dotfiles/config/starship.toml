@@ -1,18 +1,22 @@
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[👺](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+
 [aws]
 disabled = true
 
-[battery]
-full_symbol = "🔋 "
-charging_symbol = "⚡️ "
-discharging_symbol = "💀 "
-
+# [battery]
+# full_symbol = "🔋 "
+# charging_symbol = "⚡️ "
+# discharging_symbol = "💀 "
+#
 # [git_branch]
 # symbol = "🌱 "
 
-[nodejs]
-format = "via [👾 $version](bold green) "
+# [nodejs]
+# format = "via [👾 $version](bold green) "
 
-[env_var]
-variable = "SHELL_ARCH"
-style = "bold yellow"
-format = "[$env_value]($style) "
+# [env_var]
+# variable = "SHELL_ARCH"
+# style = "bold yellow"
+# format = "[$env_value]($style) "

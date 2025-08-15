@@ -1,7 +1,8 @@
 ---
-BUNDLE_GEM__COC: "true"
-BUNDLE_GEM__MIT: "true"
+BUNDLE_BUILD__NIO4R: "--with-cflags=-Wno-incompatible-pointer-types"
 BUNDLE_GEM__TEST: "rspec"
-BUNDLE_JOBS: "4"
-BUNDLE_PATH: "vendor/bundle"
-BUNDLE_BUILD__FFI: "--enable-system-libffi"
+BUNDLE_GEM__CI: "github"
+BUNDLE_GEM__MIT: "true"
+BUNDLE_GEM__COC: "true"
+BUNDLE_GEM__CHANGELOG: "false"
+BUNDLE_GEM__LINTER: "rubocop"

@@ -1,0 +1,36 @@
+modmap:
+  - name: Global
+    remap:
+      CapsLock: Ctrl_L
+keymap:
+  - name: vi # Optional
+    remap: # Required
+      # Key press -> Key press
+      C-h: left
+      C-j: down
+      C-k: up
+      C-l: right
+  - name: "Swap semicolon and colon"
+    remap:
+      semicolon: Shift-semicolon
+      Shift-semicolon: semicolon
+  - name: mac
+    # application:
+    # not: [gnome-terminal-server, Code]
+    remap:
+      # copy, paste
+      super-x: C-x
+      super-c: C-c
+      super-v: C-v
+      # browser
+      super-a: C-a
+      super-f: C-f
+      super-l: C-l
+      super-r: C-r
+      super-t: C-t
+      super-w: C-w
+      # save
+      super-s: C-s
+      # undo
+      super-z: C-z
+

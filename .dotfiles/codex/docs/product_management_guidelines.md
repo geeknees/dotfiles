@@ -86,7 +86,7 @@ To ensure predictability and deliver value continuously, a stable rhythm in agil
 
 This rhythm aligns with Drucker’s principle: **“Make an action plan.”** In agile, sprint/iteration planning corresponds to this. At the start of each iteration, the team defines the “desired outcomes” clearly and creates a concrete plan to achieve them. This ensures the team’s effort is always aimed at the highest-value goals.
 
-You can understand development process management using the “stock and flow” concept shown in `system.pdf`. Drucker’s “action plan” is a strategic intervention to intentionally control our “flow” and process “stock” predictably.
+You can understand development process management using the “stock and flow” concept. Drucker’s “action plan” is a strategic intervention to intentionally control our “flow” and process “stock” predictably.
 
 * **Stock:** The set of unstarted tasks in the product backlog—the total amount of work to be done.
 * **Flow:** The amount of work the team can complete in a fixed period (velocity).

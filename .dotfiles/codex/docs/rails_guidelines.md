@@ -1,14 +1,13 @@
 # Ruby on Rails Coding Guidelines (for Coding Agents)
+
 ## Preface
 
 This document defines **normative and practical guidelines** for coding agents to systematically generate **high-quality Ruby on Rails applications** with strong **consistency, maintainability, and extensibility**. These guidelines are designed to be applicable across projects of any scale—from small prototypes to large enterprise systems.
 
 The foundation of this guideline is rooted in two core Rails philosophies:
 
-- **Convention over Configuration (CoC)**
-    
-- **DRY (Don’t Repeat Yourself)**
-    
+* **Convention over Configuration (CoC)**
+* **DRY (Don’t Repeat Yourself)**
 
 A deep understanding and disciplined adherence to these principles is essential to unlocking Rails’ full potential and accelerating development. This guideline aims to translate those philosophies into concrete coding practices to enable efficient, robust application development.
 
@@ -22,28 +21,24 @@ Understanding the core principles that form the intellectual foundation of Rails
 
 All Rails applications **MUST** be implemented using the MVC architecture. MVC separates concerns clearly, improving organization, reusability, and testability. Responsibilities are strictly defined as follows:
 
-- **Model**  
-    The Model is fully responsible for **business logic and data persistence**. In Rails, **Active Record** serves as the ORM layer, mapping database tables to Ruby objects. Core logic—such as validation, calculations, state transitions, and integrations with external services—**MUST** be concentrated in the Model.
-    
-- **View**  
-    The View is dedicated to **presentation/UI rendering**. Its sole responsibility is to format and display data passed from the Controller (typically as HTML). Views **MUST NOT** contain business logic. Only minimal presentation logic (simple conditionals/loops) is permitted.
-    
-- **Controller**  
-    The Controller coordinates between Models and Views. It receives HTTP requests, interprets them, invokes the appropriate Model operations, and decides which View to render. The principle **“Fat Model, Skinny Controller” MUST be enforced**. This separation is not just organizational—it is critical for maintainability and testability:
-    
-    - Business logic in Models can be unit-tested independently of HTTP concerns.
-        
-    - Controllers bloated with business logic become hard to test and fragile to change.
-        
+* **Model**
+  The Model is fully responsible for **business logic and data persistence**. In Rails, **Active Record** serves as the ORM layer, mapping database tables to Ruby objects. Core logic—such as validation, calculations, state transitions, and integrations with external services—**MUST** be concentrated in the Model.
+
+* **View**
+  The View is dedicated to **presentation/UI rendering**. Its sole responsibility is to format and display data passed from the Controller (typically as HTML). Views **MUST NOT** contain business logic. Only minimal presentation logic (simple conditionals/loops) is permitted.
+
+* **Controller**
+  The Controller coordinates between Models and Views. It receives HTTP requests, interprets them, invokes the appropriate Model operations, and decides which View to render. The principle **“Fat Model, Skinny Controller” MUST be enforced**. This separation is not just organizational—it is critical for maintainability and testability:
+
+  * Business logic in Models can be unit-tested independently of HTTP concerns.
+  * Controllers bloated with business logic become hard to test and fragile to change.
 
 ### 1.2 Convention over Configuration (CoC)
 
 Rails is built to minimize configuration by relying on conventions. For example:
 
-- A `LineItem` model maps to the `line_items` table.
-    
-- A `LineItemsController` maps naturally to the `line_items` resource.
-    
+* A `LineItem` model maps to the `line_items` table.
+* A `LineItemsController` maps naturally to the `line_items` resource.
 
 By following naming and structural conventions, Rails can wire components automatically, allowing developers to focus on core functionality. Following conventions is one of the most effective ways to maximize productivity.
 
@@ -59,22 +54,17 @@ Rails routing and controller design are strongly influenced by REST (Representat
 
 Using `resources` generates the standard seven actions:
 
-- `index` — list resources
-    
-- `show` — show a single resource
-    
-- `new` — show form for a new resource
-    
-- `create` — create a resource
-    
-- `edit` — show form to edit a resource
-    
-- `update` — update a resource
-    
-- `destroy` — delete a resource
-    
+* `index` — list resources
+* `show` — show a single resource
+* `new` — show form for a new resource
+* `create` — create a resource
+* `edit` — show form to edit a resource
+* `update` — update a resource
+* `destroy` — delete a resource
 
 Following REST conventions produces intuitive, consistent, and predictable URLs and APIs. Deviations (custom actions) **MUST** be deliberate and justified, since they trade predictability for flexibility.
+
+**DHH-style routing preference:** avoid custom member/collection routes whenever possible. If an action is not one of the standard REST actions, **create a dedicated controller and resource** (often namespaced) so it still maps to `index/show/new/edit/create/update/destroy`. This keeps routes resourceful, encourages controller proliferation over custom actions, and maintains uniformity across the codebase.
 
 These principles provide the foundation for all subsequent sections.
 
@@ -88,33 +78,30 @@ To ensure consistency across a Rails application, Ruby-level conventions are ess
 
 The following naming rules **MUST** be strictly followed:
 
-- **Variables & methods:** `snake_case`  
-    Examples: `line_item`, `calculate_total_price`
-    
-- **Classes & modules:** `CamelCase`  
-    Examples: `PurchaseOrder`, `BillingHelper`
-    
-- **Constants:** `UPPER_CASE`  
-    Examples: `DEFAULT_PRICE`, `MAX_LOGIN_ATTEMPTS`
-    
-- **Filenames:** `snake_case.rb`, matching class/module name for Rails autoloading  
-    Example: `PurchaseOrder` MUST be defined in `purchase_order.rb`
-    
+* **Variables & methods:** `snake_case`
+  Examples: `line_item`, `calculate_total_price`
+
+* **Classes & modules:** `CamelCase`
+  Examples: `PurchaseOrder`, `BillingHelper`
+
+* **Constants:** `UPPER_CASE`
+  Examples: `DEFAULT_PRICE`, `MAX_LOGIN_ATTEMPTS`
+
+* **Filenames:** `snake_case.rb`, matching class/module name for Rails autoloading
+  Example: `PurchaseOrder` MUST be defined in `purchase_order.rb`
 
 ### 2.2 Coding Style
 
-- **Indentation:** use **2 spaces**. Tabs **MUST NOT** be used.
-    
-- **Parentheses in method calls:**  
-    Rails culture often omits parentheses for brevity (especially in view helpers). Omission is acceptable only when it does not reduce clarity. If calls are chained or arguments may be ambiguous, parentheses **MUST** be used.
-    
-- **String literals:**  
-    Choose quotes by intent:
-    
-    - **Single quotes (`'...'`)** for static strings (no interpolation, no escapes).
-        
-    - **Double quotes (`"..."`)** for interpolation (`#{...}`) or escape sequences (`\n`).
-        
+* **Indentation:** use **2 spaces**. Tabs **MUST NOT** be used.
+
+* **Parentheses in method calls:**
+  Rails culture often omits parentheses for brevity (especially in view helpers). Omission is acceptable only when it does not reduce clarity. If calls are chained or arguments may be ambiguous, parentheses **MUST** be used.
+
+* **String literals:**
+  Choose quotes by intent:
+
+  * **Single quotes (`'...'`)** for static strings (no interpolation, no escapes).
+  * **Double quotes (`"..."`)** for interpolation (`#{...}`) or escape sequences (`\n`).
 
 These Ruby conventions form the base of all Rails component guidelines.
 
@@ -126,18 +113,13 @@ Models contain the application’s business core. Their design quality directly 
 
 ### 3.1 Responsibilities and Placement
 
-- Model source files **MUST** reside under `app/models/`.
-    
-- **Business logic MUST be centralized in Models**, including:
-    
-    - calculations
-        
-    - complex query composition
-        
-    - state management
-        
-    - external API coordination (where appropriate)
-        
+* Model source files **MUST** reside under `app/models/`.
+* **Business logic MUST be centralized in Models**, including:
+
+  * calculations
+  * complex query composition
+  * state management
+  * external API coordination (where appropriate)
 
 This enables the “Fat Model, Skinny Controller” structure.
 
@@ -149,16 +131,11 @@ Associations **MUST** be declared using Active Record macros (`belongs_to`, `has
 
 Data integrity **MUST** be enforced at the model layer using `validates`. Use built-in helpers whenever possible:
 
-- `presence`
-    
-- `uniqueness`
-    
-- `format`
-    
-- `numericality`
-    
-- etc.
-    
+* `presence`
+* `uniqueness`
+* `format`
+* `numericality`
+* etc.
 
 Custom validations should be introduced only when necessary. Validation logic **MUST NOT** be implemented in controllers or views.
 
@@ -196,10 +173,8 @@ This makes controllers more declarative, improves readability, and increases reu
 
 Active Record callbacks (e.g., `before_save`, `after_create`) are powerful but risky. Overuse makes behavior implicit and can cause “spooky action at a distance,” complicating debugging.
 
-- **Appropriate use:** self-contained logic depending only on the model’s internal state.
-    
-- **Inappropriate use:** complex external interactions (e.g., calling external APIs in `after_save`). This can make persistence unpredictable and complicate rollbacks.
-    
+* **Appropriate use:** self-contained logic depending only on the model’s internal state.
+* **Inappropriate use:** complex external interactions (e.g., calling external APIs in `after_save`). This can make persistence unpredictable and complicate rollbacks.
 
 Callbacks **MUST** be used sparingly and intentionally. Complex workflows should be implemented via explicit service classes.
 
@@ -217,10 +192,8 @@ Complex Ruby logic inside templates (`.html.erb`, etc.) is **PROHIBITED**. Data 
 
 Rails helper methods **MUST** be used for generating links and forms:
 
-- `link_to` — instead of hardcoding `<a>` tags
-    
-- `form_for` / `form_with` — to generate correct forms tied to models and validations
-    
+* `link_to` — instead of hardcoding `<a>` tags
+* `form_for` / `form_with` — to generate correct forms tied to models and validations
 
 These helpers reduce boilerplate, improve consistency, and strengthen resilience to routing changes.
 
@@ -243,15 +216,10 @@ Controllers are traffic coordinators. Keeping responsibilities narrow is essenti
 Controllers **MUST** be limited to the following five responsibilities:
 
 1. Receive parameters and session data (`params`, session)
-    
 2. Perform authentication and authorization
-    
 3. Query/update Models (without implementing business logic)
-    
 4. Pass data to Views via instance variables (e.g., `@products`)
-    
 5. Determine the response (`render` or `redirect_to`)
-    
 
 All other logic—especially business logic—**MUST** live in Models or service objects.
 
@@ -261,10 +229,8 @@ Resource controllers **MUST** use the standard REST actions (`index`, `show`, `n
 
 ### 5.3 Session and Flash
 
-- **Session:** store small cross-request data (e.g., `user_id`). Avoid storing large data or complex objects.
-    
-- **Flash:** store one-time messages that survive redirects (e.g., “Created successfully”). Flash entries are cleared after the next request.
-    
+* **Session:** store small cross-request data (e.g., `user_id`). Avoid storing large data or complex objects.
+* **Flash:** store one-time messages that survive redirects (e.g., “Created successfully”). Flash entries are cleared after the next request.
 
 ### 5.4 Filters (before_action)
 
@@ -302,12 +268,9 @@ Tests are not merely for QA—they enable confident refactoring and rapid develo
 
 Rails supports multiple test layers. They **MUST** be used appropriately:
 
-- **Unit Tests:** primarily for Models. Validate method behavior, validations, scopes, and associations independently. This is the most important layer for business correctness.
-    
-- **Functional (Controller) Tests:** simulate HTTP requests to verify responses, templates, session, and flash behavior.
-    
-- **Integration Tests:** validate multi-step workflows across controllers/models (e.g., login → add to cart → checkout).
-    
+* **Unit Tests:** primarily for Models. Validate method behavior, validations, scopes, and associations independently. This is the most important layer for business correctness.
+* **Functional (Controller) Tests:** simulate HTTP requests to verify responses, templates, session, and flash behavior.
+* **Integration Tests:** validate multi-step workflows across controllers/models (e.g., login → add to cart → checkout).
 
 ### 6.2 Fixtures
 
@@ -334,4 +297,3 @@ This guideline focuses on Rails’ default test tooling based on the provided co
 These guidelines are not an arbitrary list of rules. They represent a proven approach to building **professional-grade, resilient, and valuable software assets**. Compliance is a strategic investment in the future of the codebase—ensuring it remains clean, maintainable, and scalable as the business grows.
 
 ---
-

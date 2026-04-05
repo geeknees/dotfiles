@@ -133,6 +133,14 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-alias claude="/Users/masumi/.claude/local/claude"
+autoload -Uz compinit && compinit
+eval "$(codex completion zsh)"
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+# Added by Antigravity
+export PATH="/Users/masumi/.antigravity/antigravity/bin:$PATH"
+
+# uv
+. "$HOME/.local/bin/env"
+
+# bun
+export PATH="$HOME/.bun/bin:$PATH"

@@ -15,5 +15,34 @@ run = "sudo du -ghxd 5 / | awk '$1 >= 1{print}' | sort -k 2"
 description = "Display all directories using more than 50MB in the current directory"
 run = "du -mhxd 5 ./ | awk '$1 >= 50{print}' | sort -k 2"
 
+[tasks.random_password]
+description = "Generate a random password"
+run = "LC_ALL=C tr -dc 'A-Za-z0-9!@#$%^&*()_+-=' </dev/urandom | head -c 16; echo"
+
+[tasks.git_cleanup]
+description = "Clean up local branches that have been merged"
+run ='''
+# リモートを取得しつつ、origin などですでに削除された branch の
+# 「リモート追跡参照」をローカルから消す
+git fetch --prune
+
+# すでに消えている worktree ディレクトリなど、
+# 壊れた / 不要になった worktree 管理情報を掃除する
+git worktree prune
+
+# main ブランチに移動する
+# （いま消したい branch 自身に乗っていると削除できないため）
+git switch main
+
+# main の最新状態をリモートから取り込む
+# これにより「main にマージ済みかどうか」の判定が新しくなる
+git pull
+
+# 現在の HEAD（ここでは main）にマージ済みのローカル branch を一覧し、
+# 現在いる branch(*), main, master, develop を除外して、
+# 残った branch を安全削除（-d）する
+git branch --merged | grep -vE '^\*|main$|master$|develop$' | xargs -r git branch -d
+'''
+
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]

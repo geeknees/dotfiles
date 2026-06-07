@@ -1,7 +1,8 @@
 [tools]
 ruby = "latest"
-node = "latest"
+node = "lts"
 python = "3.12"
+bun = "latest"
 
 [tasks.rovodev]
 description = "Run rovo dev"
@@ -46,3 +47,6 @@ git branch --merged | grep -vE '^\*|main$|master$|develop$' | xargs -r git branc
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "node"]
+
+[settings.ruby]
+compile = false

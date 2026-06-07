@@ -121,8 +121,6 @@ export PATH="$PATH:/Users/masumi/.foundry/bin"
 # __NSPlaceholderDictionary
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-export RUBYOPT=--yjit
-
 eval "$(mise activate zsh)"
 
 # pnpm
@@ -144,3 +142,8 @@ export PATH="/Users/masumi/.antigravity/antigravity/bin:$PATH"
 
 # bun
 export PATH="$HOME/.bun/bin:$PATH"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/masumi/.lmstudio/bin"
+# End of LM Studio CLI section
+

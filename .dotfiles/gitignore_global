@@ -10,3 +10,8 @@ bundle_bin
 database
 
 tmp_code_*
+.beads/
+
+# bun.lock
+# mise.toml
+

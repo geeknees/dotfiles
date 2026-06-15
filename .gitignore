@@ -1,0 +1,14 @@
+# secrets / local-only
+private/
+.local/
+*.key
+*.pem
+*.env
+.env*
+*token*
+*secret*
+*credential*
+*oauth*
+*refresh*
+*private-key*
+.DS_Store

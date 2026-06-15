@@ -147,3 +147,4 @@ export PATH="$HOME/.bun/bin:$PATH"
 export PATH="$PATH:/Users/masumi/.lmstudio/bin"
 # End of LM Studio CLI section
 
+alias claude-chibatech='env -u ANTHROPIC_API_KEY -u ANTHROPIC_AUTH_TOKEN -u CLAUDE_CODE_OAUTH_TOKEN CLAUDE_CONFIG_DIR="$HOME/.claude-chibatech" claude'

@@ -15,3 +15,5 @@ tmp_code_*
 # bun.lock
 # mise.toml
 
+
+**/.claude/settings.local.json

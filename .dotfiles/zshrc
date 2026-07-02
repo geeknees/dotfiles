@@ -148,3 +148,7 @@ export PATH="$PATH:/Users/masumi/.lmstudio/bin"
 # End of LM Studio CLI section
 
 alias claude-chibatech='env -u ANTHROPIC_API_KEY -u ANTHROPIC_AUTH_TOKEN -u CLAUDE_CODE_OAUTH_TOKEN CLAUDE_CONFIG_DIR="$HOME/.claude-chibatech" claude'
+
+if [ "$TERM" = "xterm-ghostty" ]; then
+  export TERM=xterm-256color
+fi

@@ -1,13 +1,17 @@
 scan_timeout = 10
 command_timeout = 1000
 
-
 # Replace the "❯" symbol in the prompt with "➜"
 [character] # The name of the module we are configuring is "character"
 success_symbol = "[👺](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
 
 [aws]
 disabled = true
+
+[env_var.CLAUDE_CONFIG_DIR]
+default = ''
+format = "[$env_value]($style) "
+style = "green"
 
 # [battery]
 # full_symbol = "🔋 "

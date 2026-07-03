@@ -1,6 +1,5 @@
+# LC_ALL は全カテゴリを強制上書きするため設定しない（sort 順や英語ロケール前提ツールの誤動作を防ぐ）
 export LANG=ja_JP.UTF-8
-export LC_ALL=ja_JP.UTF-8
-export LC_CTYPE=ja_JP.UTF-8
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -69,57 +68,22 @@ alias bes='bundle exec sidekiq -C config/sidekiq.yml'
 alias ber='bundle exec rspec'
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
-# Base16 Shell
-# BASE16_SHELL="$HOME/.config/base16-shell/"
-# [ -n "$PS1" ] && \
-# [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
-# eval "$("$BASE16_SHELL/profile_helper.sh")"
-
-# gitignore ex: gi ruby >> .gitignore
-# function gi() { curl https://www.gitignore.io/api/$@ ;}
-
 # brew
 export HOMEBREW_NO_ANALYTICS=1
-
-# Autostart if not already in tmux.
-# if [[ ! -n $TMUX && $- == *l* ]]; then
-#   # get the IDs
-#   ID="`tmux list-sessions`"
-#   if [[ -z "$ID" ]]; then
-#     tmux new-session
-#   fi
-#   create_new_session="Create New Session"
-#   ID="$ID\n${create_new_session}:"
-#   ID="`echo $ID | peco | cut -d: -f1`"
-#   if [[ "$ID" = "${create_new_session}" ]]; then
-#     tmux new-session
-#   elif [[ -n "$ID" ]]; then
-#     tmux attach-session -t "$ID"
-#   else
-#     :  # Start terminal normally
-#   fi
-# fi
 
 # m1 mac
 if [[ $(arch) == 'arm64' ]]; then
   export PATH="$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-  # export LDFLAGS="-L/opt/homebrew/opt/libpq/lib"
-  # export CPPFLAGS="-I/opt/homebrew/opt/libpq/include"
-  # export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
   export SHELL_ARCH="arm64"
-  echo '🚀 arm64 '
+  # 非対話シェル（scp/rsync 等）で stdout を汚さないようガード
+  [[ -o interactive ]] && echo '🚀 arm64 '
 else
   export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
   export SHELL_ARCH="x86"
-  echo '👋 x86 '
+  [[ -o interactive ]] && echo '👋 x86 '
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH="$PATH:/Users/masumi/.foundry/bin"
-
-# __NSPlaceholderDictionary
-export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 eval "$(mise activate zsh)"
 
@@ -131,8 +95,24 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-autoload -Uz compinit && compinit
-eval "$(codex completion zsh)"
+# compinit: dump が 24 時間以内ならセキュリティチェックを省略して高速化
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+zinit cdreplay -q
+
+# codex completion: 毎回のサブプロセス起動を避けてファイルにキャッシュ
+_codex_comp="$HOME/.cache/zsh/codex-completion.zsh"
+if command -v codex >/dev/null; then
+  if [[ ! -f $_codex_comp || $(command -v codex) -nt $_codex_comp ]]; then
+    mkdir -p "${_codex_comp:h}" && codex completion zsh > "$_codex_comp"
+  fi
+  source "$_codex_comp"
+fi
+unset _codex_comp
 
 # Added by Antigravity
 export PATH="/Users/masumi/.antigravity/antigravity/bin:$PATH"
@@ -148,7 +128,3 @@ export PATH="$PATH:/Users/masumi/.lmstudio/bin"
 # End of LM Studio CLI section
 
 alias claude-chibatech='env -u ANTHROPIC_API_KEY -u ANTHROPIC_AUTH_TOKEN -u CLAUDE_CODE_OAUTH_TOKEN CLAUDE_CONFIG_DIR="$HOME/.claude-chibatech" claude'
-
-if [ "$TERM" = "xterm-ghostty" ]; then
-  export TERM=xterm-256color
-fi

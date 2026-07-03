@@ -31,37 +31,15 @@ git fetch --prune
 # 壊れた / 不要になった worktree 管理情報を掃除する
 git worktree prune
 
-# main ブランチに移動する
+# デフォルトブランチ（main / master など）を自動検出して移動する
 # （いま消したい branch 自身に乗っていると削除できないため）
-git switch main
+# set-head --auto でリモートの HEAD を問い合わせて origin/HEAD を最新化する
+git remote set-head origin --auto >/dev/null
+DEFAULT=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
+git switch "$DEFAULT"
 
-# main の最新状態をリモートから取り込む
-# これにより「main にマージ済みかどうか」の判定が新しくなる
-git pull
-
-# 現在の HEAD（ここでは main）にマージ済みのローカル branch を一覧し、
-# 現在いる branch(*), main, master, develop を除外して、
-# 残った branch を安全削除（-d）する
-git branch --merged | grep -vE '^\*|main$|master$|develop$' | xargs -r git branch -d
-'''
-
-[tasks.git_cleanup_with_master]
-description = "Clean up local branches that have been merged"
-run ='''
-# リモートを取得しつつ、origin などですでに削除された branch の
-# 「リモート追跡参照」をローカルから消す
-git fetch --prune
-
-# すでに消えている worktree ディレクトリなど、
-# 壊れた / 不要になった worktree 管理情報を掃除する
-git worktree prune
-
-# master ブランチに移動する
-# （いま消したい branch 自身に乗っていると削除できないため）
-git switch master
-
-# master の最新状態をリモートから取り込む
-# これにより「master にマージ済みかどうか」の判定が新しくなる
+# デフォルトブランチの最新状態をリモートから取り込む
+# これにより「マージ済みかどうか」の判定が新しくなる
 git pull
 
 # 現在の HEAD（ここでは main）にマージ済みのローカル branch を一覧し、

@@ -1,0 +1,3 @@
+# rcm 設定（~/.rcrc としてリンクされる）
+# sddm.conf: Linux 専用
+EXCLUDES="README.md sddm.conf"
